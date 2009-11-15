@@ -1,0 +1,17 @@
+<?php
+include "bblog/config.php";
+$uriparams = explode("/",$_SERVER['PATH_INFO']);
+$sectionname = $uriparams[1];
+$sectionid = $bBlog->sect_by_name[$sectionname];
+if(is_numeric($sectionid)) {
+  $bBlog->assign('sectionname',$sectionname);
+  $bBlog->assign('sectionid',$sectionid);
+  $bBlog->show_section = $sectionid; 
+  
+  $bBlog->display('index.html');
+  //if you use the new lines or dmig theme, this should be:
+  //$bBlog->display('section.html');
+  //so "hide post from home" works correctly
+} else {
+  echo '<p>Error, not a section</p>';
+} ?>

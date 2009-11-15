@@ -1,0 +1,106 @@
+{getpost assign=post postid=$postid}
+{assign var=title value="`$post.title` - $blogname"}
+{include file="header.html"}
+<h2 class="date">{$post.posttime|date_format:s2}</h2>
+<div class="blogbody">
+<h3 class="title">{$post.title}</h3>
+{$post.body}
+<br />
+<div class="posted">{$post.posttime|date_format:jim}<br />The trackback url for this post is {$post.trackbackurl}</div>
+
+	
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+    rdf:about="{$post.permalink}"
+    dc:identifer="{$post.permalink}"
+    dc:title="{$post.title}"
+    trackback:ping="{$post.trackbackurl}" />
+</rdf:RDF>
+
+<hr noshade/>
+</div>
+
+{getcomments assign=comments}
+{foreach from=$comments item=comment}
+    {if $comment.deleted eq "true"}
+    <!-- deleted comment - you could put something in here like LJ does -->
+    {elseif $comment.onhold}
+    	<div style="margin-left: {$comment.level25}px;" class="comments-head">...</div>
+	<div class="comments-body" style="margin-left: {$comment.level25}px;">Comment pending moderation
+	</div>
+
+    {else}
+    <div style="margin-left: {$comment.level25}px;" class="comments-head">{$comment.title|nohtml}</div>
+    <div class="comments-body" style="margin-left: {$comment.level25}px;">
+
+ 
+     
+
+    {$comment.body|kses|nl2br}<hr />
+	<span class="comments-post">
+   {if $comment.type eq 'trackback'}
+    Trackback from <a href="{$comment.websiteurl}">{$comment.author}</a> {$comment.posted|date_format:since} &#8226;   {$comment.replylink}
+    {else}
+    {$comment.posted|date_format:since} by {$comment.author} &#8226; {$comment.emaillink} &#8226;  {$comment.websitelink} &#8226; {$comment.replylink}
+    {/if}
+
+<br />Comment Trackback URL : {$comment.trackbackurl}</span>
+   </div>
+    {/if}
+
+{/foreach}
+
+{if $post.allowcomments}
+<form method="post" action="{$commentformaction}">
+{$commentformhiddenfields}
+<h3 class="title">Add Comment</h3>
+<p><em>( to reply to a comment, click the reply link next to the comment )</em></p>
+<div class="form">
+<div class="clear">&nbsp;</div>
+<div class="formleft">Comment Title</div>
+<div class="formright"><input name="title" type="text" id="title" value="{$commentreplytitle}"/></div>
+<div class="clear">&nbsp;</div>
+<div class="formleft">Your Name: </div>
+<div class="formright"><input name="name" type="text" id="author" /></div>
+<div class="clear">&nbsp;</div>
+<div class="formleft">Email Address: </div>
+<div class="formright"><input name="email" type="text" id="email" /> Make Public? <input class="checkbox" name="public_email" type="checkbox" id="public_email" value="1" checked="checked"/></div>
+<div class="clear">&nbsp;</div>
+<div class="formleft">Website: </div>
+<div class="formright"><input name="website" type="text" id="url" /> Make Public? <input class="checkbox" name="public_website" type="checkbox" id="public_website" value="1" checked="checked" /></div>
+<div class="clear">&nbsp;</div>
+<div class="formleft">Comment:</div>
+
+<div class="formright"><textarea name="comment" cols="30" rows="6" wrap="VIRTUAL" id="text"></textarea></div>
+<div class="clear"><p><i>Allowed XHTML tags : a, b, i, strong, code, acrynom, blockquote, abbr. Linebreaks will be converted automatically.</i></p>
+<div class="clear">&nbsp;</div>
+<div class="formleft">&nbsp;</div> 
+<div class="formright"><input name="submit" type="submit" id="submit" value="Submit Comment" /><input type="hidden" name="do" value="submitcomment" /></div>
+<div class="clear">&nbsp;</div>
+</div> 
+</form>
+{else}
+<p>Comments have now been turned off for this post</p>
+{/if}
+
+
+</div>
+
+
+</div>
+</div>
+<div id="links">
+
+<div class="sidetitle">Navigation</div>
+<div class="side">
+{links cat="Navigation"}
+</div>
+
+<div class="sidetitle">Blogs I Read</div>
+<div class="side">
+{links cat="Blogs I Read"}
+</div>
+
+{include file="footer.html"}

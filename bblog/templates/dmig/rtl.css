@@ -1,0 +1,59 @@
+/*
+this is the css file for making the theme RTL compatible.
+basically we need to shift all margins/paddings plus add direction :rtl.
+
+ */
+
+html, body{
+	direction: rtl
+}
+
+/* make fontsize a bit bigger for Arabic and Hebrew signs...*/
+body{
+	font-size: 12px;
+}
+h1,h2 {font-size: 14px; height: 16px;}
+h3,h4	{font-size: 12px; }
+h5,h6 {font-size: 11px;}
+
+h1.logo{
+	float: right;
+}
+
+
+
+blockquote, code{
+	margin: 0px 10px 0px 0px; 
+}
+
+#content ul, #content ol{
+	margin-left: 0px;
+	margin-right: 15px;
+}
+
+#content ol {
+	margin-left: 0px;
+	margin-right: 20px;
+}
+
+/* the trackback link*/
+.posted {
+	text-align: left;
+}
+
+#paper {
+	margin-left: auto;
+	text-align: right;
+	margin-right: 0px;
+
+}
+
+#archive .day{
+	margin-left: 0px;
+	margin-right: 15px;
+}
+
+
+#links{
+	text-align: right;
+}

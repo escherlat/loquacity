@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>{$message_title}</title>
+<link rel="stylesheet" type="text/css" title="Main" href="{$bblogurl}style/admin.css" media="screen" />
+
+ {if $redirect}
+  <!-- need meta redirect -->
+ {/if}
+ </style>
+</head>
+
+<body>
+<div id="header">
+<div>
+<a href="{$blogurl}">&#187; Home</a>
+</div>
+</div>
+
+
+<div id="content" class="popup">
+<h3>{$message_title}</h3>
+
+{$message}
+
+</div>
+<br/><br/>
+<div id="footer">
+<a href="http://www.bBlog.com" target="_blank">
+Powered by bBlog {$bBlog_version}</a>
+</div>
+
+
+</body>
+</html>

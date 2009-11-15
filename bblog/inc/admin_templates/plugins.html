@@ -1,0 +1,76 @@
+{include file="common/html_start.html"}
+{include file="common/layout_start.html"}
+
+{if $show_plugin_menu}
+{literal}
+<script type="text/javascript">
+var win= null;
+function PluginHelp(pid,w,h){
+      var winl = (screen.width-w)/2;
+      var wint = (screen.height-h)/2;
+      var settings  ='height='+h+',';
+      var scroll='yes';
+      var mypage='index.php?b=help&pid='+pid;
+      settings +='width='+w+',';
+      settings +='top='+wint+',';
+      settings +='left='+winl+',';
+      settings +='scrollbars='+scroll+',';
+      settings +='resizable=yes';
+      win=window.open(mypage,'bbloghelp',settings);
+      if(parseInt(navigator.appVersion) >= 4){win.window.focus();}
+}
+</script>
+{/literal}
+
+
+{$np}
+<table cellpadding="4" cellspacing="0" class="list">
+<tr>
+<th>Plugin Name</th>
+<th>&#160;</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+
+{section name=p loop=$plugin_ar}
+<tr class="{cycle values="high,low"}" title="Licence: {$plugin_ar[p].licence}; Author: {$plugin_ar[p].author|nohtml}">
+  <td>
+    {if $plugin_ar[p].type eq 'admin'}
+      <a href="index.php?b=plugins&amp;p={$plugin_ar[p].name}">
+        <b>{$plugin_ar[p].displayname}</b>
+      </a>
+    {else}
+      {$plugin_ar[p].displayname}
+    {/if}
+  </td>
+  <td class="action">
+  {if $plugin_ar[p].help}
+    <input type="submit" onclick="PluginHelp({$plugin_ar[p].id},450,400);" class="submit" value="Info / Help"/>
+  {/if}
+  </td>
+  <td>{$plugin_ar[p].type}</td>
+  <td>{$plugin_ar[p].description}</td>
+</tr>
+{/section}
+</table>
+
+
+<form action="index.php" method="post">
+<p>
+<input type="hidden" name="b" value="plugins"/>
+<input type="hidden" name="scan" value="true"/>
+<input type="submit" class="submit" value="Scan for new plugins"/>
+</p>
+</form>
+<form action="index.php" method="post">
+<p>
+<input type="hidden" name="b" value="plugins"/>
+<input type="hidden" name="scan_refresh" value="true"/>
+<input type="submit" class="submit" value="Refresh All"/>
+</p>
+</form>
+{else}
+  {include file=$plugin_template}
+{/if}
+{include file="common/layout_stop.html"}
+{include file="common/html_stop.html"}

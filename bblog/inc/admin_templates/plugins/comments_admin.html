@@ -1,0 +1,113 @@
+<div>
+{if $showeditform}
+  <hr/>
+  <h3>Edit Comment</h3>
+  
+  <form action="index.php" method="post">
+    <input type="hidden" name="b" value="plugins" />
+    <input type="hidden" name="p" value="comments" />
+    <input type="hidden" name="commentid" value="{$comment.commentid}" />
+    <input type="hidden" name="commentdo" value="editsave" />
+    <h4>Title</h4>
+    <div class="frame">
+      <input class="text" size="40" type="text" name="title" value="{$comment.title|htmlspecialchars}" />
+    </div>
+    <h4>Author</h4>
+    <div class="frame">
+      <input class="text" size="40" type="text" name="author" value="{$comment.author|htmlspecialchars}" />
+    </div>
+    <h4>Email</h4>
+    <div class="frame">
+      <input class="text" size="40" type="text" name="email" value="{$comment.email|htmlspecialchars}" />
+    </div>
+    <h4>Website</h4>
+    <div class="frame">
+      <input class="text" size="40" type="text" name="websiteurl" value="{$comment.websiteurl|htmlspecialchars}" />
+    </div>
+    <h4>Comment Body</h4>
+    <div class="frame">
+      <textarea class="text" name="body" cols="60" rows="10" >{$comment.body|htmlspecialchars}</textarea>
+    </div>
+    <h4>Save Comment</h4>
+    <div class="button">
+      <input type="submit" class="submit" name="s" value="Save Comment" />
+    </div>
+  </form>
+{else}
+<div class='frame'>
+  {$message}
+  <div>
+    <form action="index.php" method="post">
+      <input type="hidden" name="b" value="plugins" />
+      <input type="hidden" name="p" value="comments" />
+      Show
+      <select name="commentdo" id="commentsQuantity">
+        <option value="25"{if $commentAmount eq 25} selected{/if}>25</option>
+        <option value="50"{if $commentAmount eq 50} selected{/if}>50</option>
+        <option value="100"{if $commentAmount eq 100} selected{/if}>100</option>
+        <option value="150"{if $commentAmount eq 150} selected{/if}>150</option>
+        <option value="200"{if $commentAmount eq 200} selected{/if}>200</option>
+      </select>
+       comments from all postings
+      <input type="submit" value="Show" class="submit" />
+    </form>
+  </div>
+  <div>
+    <form action="index.php" method="post">
+      <input type="hidden" name="b" value="plugins" />
+      <input type="hidden" name="p" value="comments" />
+      Show comments for post <select name="post_comments">
+                               <option value=''>Choose ...</option>
+                               {foreach from=$postselect item=postitem}
+                               <option value="{$postitem.postid}" {if $smarty.post.post_comments eq $postitem.postid}selected{/if}>{$postitem.title} ({$postitem.c})</option>
+                               {/foreach}
+                             </select>
+       <input type="submit" value="Go" name="go" class="submit" />
+    </form>
+  </div>
+</div>
+<br />
+<form action="index.php" method="post">
+<input type=button value="Check All" onClick="this.value=check(this.form.list)" class="submit" />
+  With selected 
+  <select name="commentdo" id="commentdo">
+    <option value="">do ...</option>
+    <option value="Approve">Approve</option>
+    <option value="Delete">Delete</option>
+  </select>
+  <input type="hidden" name="b" value="plugins" />
+  <input type="hidden" name="p" value="comments" />
+  <input type="submit" name="submit" value="Change" class="submit" />
+  <table cellpadding="0" cellspacing="0" class="list">
+    <tr>
+      <th></th>
+      <th>Author</th>
+      <th>IP</td>
+      <th style="width:50%;">Comment</th>
+      <th>Post</th>
+      <th>&#160;</th>
+    </tr>
+    {section name=c loop=$comments}
+    <tr class="{cycle values="high,low"}" style="vertical-align:top; {if $comments[c]->onhold eq 1} color: #999;{/if}">
+      <td>
+        <input type="checkbox" id="list" name="commentid[]" value="{$comments[c]->commentid}" />
+        <input type="hidden" name="postid[]" value="{$comments[c]->postid}" />
+      </td>
+      <td>
+      {if $comments[c]->posteremail}
+        <a href='mailto:{$comments[c]->posteremail}'>{$comments[c]->postername}</a>
+      {else}
+        {$comments[c]->postername}
+      {/if}
+      </td>
+      <td>{$comments[c]->ip}</td>
+      <td><a href="index.php?b=plugins&amp;p=comments&amp;commentdo=Edit&amp;editComment={$comments[c]->commentid}&amp;postid={$comments[c]->postid}" title="Edit this comment">edit</a> {$comments[c]->commenttext|nohtml|truncate:200}</td>
+      <td>{$comments[c]->title}</td>
+      <td>
+      </td>
+    </tr>
+  {/section}
+  </table>
+</form>
+{/if}
+</div>

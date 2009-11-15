@@ -1,0 +1,12 @@
+<?php
+include "bblog/config.php";
+$uriparams = explode("/",$_SERVER['PATH_INFO']);
+$postid = $uriparams[1];
+if(is_numeric($postid)) {	//we only want int values.
+					 	    //anything else won't make sense and is dangerous
+  $bBlog->show_post = (int)$postid;
+  $bBlog->assign('postid',(int)$postid);
+  $bBlog->display('post.html');
+} else {
+  echo '<p>Error,not a post id</p>';
+} ?>

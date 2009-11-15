@@ -1,0 +1,163 @@
+{getpost assign=post postid=$postid}
+{assign var=title value="`$post.title` - $blogname"}
+{include file="header.html"}
+
+<div class="blogbody">
+	<div class="box1">
+		<h2 class="title"><a href="{$post.permalink}">{$post.title}</a></h2>
+	</div><!-- .box1 -->	
+
+	<div class="box1" style="padding: 0px;">
+		<h3 class="date">{$post.author.fullname} | {$post.posttime|date_format:s2}</h3>
+	</div><!-- .box1 -->
+
+	<div class="box2">
+		{$post.body}
+	</div><!-- .box2 -->
+  
+	<div class="box1">
+		<div class="posted">{$post.posttime|date_format:jim}<br />The trackback url for this post is {$post.trackbackurl}</div>
+	</div>
+
+<!--	put as comment for xhtml validity
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+    rdf:about="{$post.permalink}"
+    dc:identifer="{$post.permalink}"
+    dc:title="{$post.title}"
+    trackback:ping="{$post.trackbackurl}" />
+</rdf:RDF>
+-->
+
+</div><!-- .blogbody-->
+
+<div class="box1">
+	<h2 class="title">Comments on this post:</h2>
+</div>
+
+<!-- comments: -->
+{getcomments assign=comments}
+{foreach from=$comments item=comment}
+<div class="box1">
+    {if $comment.deleted eq "true"}
+	    this comment has been deleted
+    {elseif $comment.onhold}
+    <div style="margin-left: {$comment.level25}px;" class="comments-head">...</div>
+	  <div class="comments-body" style="margin-left: {$comment.level25}px;">Comment pending moderation</div>
+
+    {else}
+	    <div style="margin-left: {$comment.level25}px;" class="comments-head">{$comment.title|nohtml}</div>
+	    <div class="comments-body" style="margin-left: {$comment.level25}px;">
+	 
+	    {$comment.body|kses|nl2br}
+	 	  <div class="comments-post">
+	    	{if $comment.type eq 'trackback'}
+	    		Trackback from <a href="{$comment.websiteurl}">{$comment.author}</a> {$comment.posted|date_format:since} &#8226;   {$comment.replylink}
+	    	{else}
+	    		<br /> {$comment.posted|date_format:"%Y/%m/%d"} by {$comment.author}
+	    		 <!-- we don't need no spam, so why would we need the email to be public?
+	    		 &#8226; {* $comment.emaillink *}
+	    		 -->
+	    		  &#8226; {$comment.websitelink} &#8226; {$comment.replylink}
+	    	{/if}
+	   	<br />Comment Trackback URL : {$comment.trackbackurl}</div>
+	   	</div><!-- .comments-body -->
+	   	
+
+    {/if}
+</div><!-- .box1 -->    
+{/foreach}
+
+
+
+{if $post.allowcomments}
+<div class="box1" style="margin: 0px;">
+	<h2 class="title">Add Comment</h2>
+	<p><em>( to reply to a comment, click the reply link next to the comment )</em></p>
+</div>
+<form method="post" action="{$commentformaction}" style="margin: 0px; padding: 0px; border: 0px;">
+{$commentformhiddenfields}
+<div class="form">
+<div class="box1">	
+		<div class="clear">&nbsp;</div>
+		<div class="formleft">Comment Title</div>
+		<div class="formright">
+			
+		<div class="formfieldcontainer">	
+			<div class="box">
+				<input name="title" type="text" id="title" value="{$commentreplytitle}" class="formfield"/>
+			</div><!-- .box -->
+		</div><!-- formfieldcomtainer -->
+			
+			
+		</div>
+		<div class="clear">&nbsp;</div>
+		<div class="formleft">Your Name: </div>
+		<div class="formright">
+			
+		<div class="formfieldcontainer">	
+			<div class="box">
+				<input name="name" type="text" id="author" class="formfield"/>
+			</div><!-- .box -->
+		</div><!-- formfieldcomtainer -->
+			
+			
+		</div>
+		<div class="clear">&nbsp;</div>
+		<div class="formleft">Email Address: (will never be shown)</div>
+		<div class="formright">
+		
+		<div class="formfieldcontainer">	
+			<div class="box">
+				<input name="email" type="text" id="email" class="formfield"/>
+			</div><!-- .box -->
+		</div><!-- formfieldcomtainer -->			 
+
+			 <!-- again: we need no mail spam and none of the people that leave comments!
+			 Make Public? <input class="checkbox" name="public_email" type="checkbox" id="public_email" value="0" checked="checked"/> (not recommended because of spam!)
+			 -->
+			 </div>
+		<div class="clear">&nbsp;</div>
+		<div class="formleft">Website: </div>
+		<div class="formright">
+			
+			<div class="formfieldcontainer">
+				<div class="box">
+					<input name="website" type="text" id="url" class="formfield" />
+				</div><!-- .box -->
+			</div><!-- .formfieldcomtainer -->
+			
+			 Make Public? <input class="checkbox" name="public_website" type="checkbox" id="public_website" value="1" checked="checked" />		
+			</div>
+		<div class="clear">&nbsp;</div>
+</div><!-- box1 -->
+		
+		<div class="box1">
+		<div class="formleft">Comment:</div>
+		</div>
+		<div class="formright">
+			<div class="box1">
+				<div class="box">  
+					<textarea name="comment" rows="6" id="text" class="commentsfield"></textarea>			
+				</div>
+				<div class="clear"><p><i>Allowed XHTML tags : a, b, i, strong, code, acrynom, blockquote, abbr. Linebreaks will be converted automatically.</i></p></div>
+				<div class="formright">
+						<input name="submit" type="submit" id="submit" value="Submit Comment" class="box1" style="padding: 3px;"/> 
+					<input type="hidden" name="do" value="submitcomment" />
+				</div><!-- .box -->
+			 </div><!-- .box1 -->
+		 </div><!-- .formright -->
+</div><!-- .form --> 
+</form>
+{else}
+<div class="box1">
+	<p>Comments have now been turned off for this post</p>
+</div>
+{/if}
+
+</div><!-- .blog -->
+</div><!-- #content -->
+{include file="side.html"}
+{include file="footer.html"}

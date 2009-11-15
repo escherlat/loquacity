@@ -1,0 +1,24 @@
+{include file="common/html_start.html"}
+<div id="header">
+<br/>
+<div>
+<a href="#" onclick="window.close()">&#187; Close</a>
+</div>
+</div>
+
+<div id="content" class="popup">
+{if $showmessage}
+     {include file="common/message.html"}
+{/if}
+<h3>Post Entry</h3>
+
+<form action='index.php' method='post' name='post'  onsubmit="javascript:copypost();">
+<input type='hidden' name='popup' value='true'/>
+<input type='hidden' name='b' value='post'/>
+<input type='hidden' name='newpost' value='true'/>
+{include file="common/post_edit.html"}
+</form>
+
+
+{include file="common/layout_stop.html"}
+{include file="common/html_stop.html"}

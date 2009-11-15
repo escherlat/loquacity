@@ -1,0 +1,28 @@
+{include file="common/html_start.html"}
+
+<div id="header">
+<br/>
+<div>
+<a href="#" onclick="window.close()">&#187; Close</a>
+</div>
+</div>
+
+
+<div id="content" class="popup">
+<h3>{$title}</h3>
+
+
+{if $pluginhelp}
+
+<small><b>Plugin type:</b></small> {$type}<br />
+<small><b>Description:</b></small> {$description}<br />
+<small><b>Author(s):</b></small> {$authors|htmlspecialchars}<br />
+<small><b>License:</b></small> {$license}<br />
+<hr>
+<small><b>Documentation:</b></small><br />
+{/if}
+{$helptext}
+<br/><br/>
+</div>
+
+{include file="common/html_stop.html"}

@@ -1,0 +1,4 @@
+All documentation is located in /bblog/docs/. Look there for Readmes, instructions and more.
+
+--
+The bBlog Team - http://www.bblog.com

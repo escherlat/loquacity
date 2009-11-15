@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>{$smarty.const.C_BLOGNAME|htmlspecialchars}</title>
+        <description>{$smarty.const.C_BLOG_DESCRIPTION}</description>
+        <link>{$smarty.const.C_BLOGURL}</link>
+        <lastBuildDate>{$smarty.const.C_LAST_MODIFIED|date_format:"r"}</lastBuildDate>
+        <generator>bBlog {$bBlog_version}</generator>
+        <copyright>All Rights Reserved</copyright>
+        
+            {foreach from=$posts item=post}
+
+            <item>
+                <guid isPermaLink="true">{$post.permalink}</guid>
+                <title>{$post.title|htmlspecialchars}</title>
+                <link>{$post.permalink}</link>
+
+                {if strlen($post.author.email) > 0}
+
+                    {if strlen($post.author.fullname) > 0}
+
+                <author>{$post.author.email} ({$post.author.fullname})</author>
+
+                    {else}
+
+                <author>{$post.author.email} ({$post.author.nickname})</author>
+
+                    {/if}
+
+                {/if}
+
+                {foreach from=$post.sections item=section}
+
+                <category>{$section.name|htmlentities}</category>
+
+                {/foreach}
+
+                <pubDate>{$post.posttime|date_format:"r"}</pubDate>
+                <description>{$post.body|htmlspecialchars}</description>
+            </item>
+
+            {/foreach}
+
+    </channel>
+</rss>
+
+
+
+

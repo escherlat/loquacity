@@ -1,0 +1,14 @@
+xLib - Advanced DOM Javascript Library
+======================================
+Copyright Sebastian Werner, 2002-2003
+
+About:                                                                                                                         
+xLib is an advanced DOM Javascript library that supports dynamic layers,                                                       
+flexible menus, advanced auto-columns, simple debugging methods, alpha                                                         
+state signals-and-slots, and much more.                                                                                        
+                                                                                                                                
+Homepage:
+http://www.sebastian-werner.net/pages/xlib
+
+Author:                                                                                                                        
+Sebastian Werner <xlib at sebastian dash werner dot net>

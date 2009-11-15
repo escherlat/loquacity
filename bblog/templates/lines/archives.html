@@ -1,0 +1,22 @@
+{assign var=title value="Archives - $blogname"}
+{include file="header.html"}
+{getarchiveposts assign=posts}
+{foreach from=$posts item=post}
+{if $post.newmonth}<h2 class="date">{$post.posttime|date_format:"%b %Y"}</h2>{/if}
+<p>{$post.posttime|date_format:"%d"}<sup>{$post.posttime|date_format:"suffix"}</sup>
+ <a href="{$post.permalink}">{$post.title}</a> <br />
+{/foreach}
+</div>
+</div>
+<div id="links">
+
+<div class="sidetitle">Navigation</div>
+<div class="side">
+{links cat="Navigation"}
+</div>
+
+<div class="sidetitle">Recent Posts</div>
+<div class="side">
+{recentposts}
+</div>
+{include file="footer.html"}

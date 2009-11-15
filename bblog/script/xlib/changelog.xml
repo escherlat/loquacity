@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+<changelog project="xlib">
+  <version nr="0.1" state="alpha">
+    <entry>Initial Release</entry>
+  </version>
+  <version nr="0.1.1" state="alpha">
+    <entry>Added some package stuff: README, LICENCE, CHANGELOG</entry>
+    <entry>Fixed a bug in xBrowser.js, which stops Internet Explorers Javascript Engine</entry>
+    <entry>Fixed a bug in xBrowser.js with Internet Explorer 4 detection</entry>
+  </version>  
+</changelog>

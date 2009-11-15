@@ -1,0 +1,27 @@
+{foreach from=$posts item=post}
+<div class="blogbody">
+<div class="box1">
+	<h2 class="title"><a href="{$post.permalink}">{$post.title}</a></h2>
+</div><!-- .box1 -->	
+
+<div class="box1" style="padding: 0px;">
+	<h3 class="date">{$post.author.fullname} | {$post.posttime|date_format:s2}</h3>
+</div>
+ 
+	<div class="box2">
+		{$post.body}
+	</div><!-- .box2 -->
+	<div class="box1">
+	<div class="posted">{sectionlinks sep=" &middot; " sections=$post.sections} &#8226; <a href="{$post.permalink}">{$post.commentcount} Comments/Trackbacks</a></div>
+	</div><!-- .box1 -->
+</div><!-- .blogbody -->
+{/foreach}
+
+</div><!-- .blog -->
+<!-- </div>  .box1 -->
+</div><!-- #content -->
+
+
+ 
+{include file="side.html"}
+{include file="footer.html"}

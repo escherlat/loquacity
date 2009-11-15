@@ -1,0 +1,39 @@
+{include file="common/html_start.html"}
+
+<div id="header">
+<h1>bBlog</h1>
+<h2>{$tagline}</h2>
+</div>
+
+<div id="teaser">
+Welcome to bBlog
+</div>
+
+<div id="content">
+  <h3>{$title}</h3>
+
+<form action="index.php" method="post" name="post">
+  <input type="hidden" name="b" value="login" />
+  <input type="hidden" name="redirect" value="{$redirect}" />
+  {if $tried2login}
+    <p class="warning">Sorry, wrong username / password</p>
+  {/if}
+
+  <h4>Username</h4>
+  <div class="frame">
+    <input class="text" type="text" name="username" value="" />
+  </div>
+
+  <h4>Password</h4>
+  <div class="frame">
+    <input class="text" type="password" name="password" value="" />
+  </div>
+
+  <div class="button">
+    <input class="submit" type="submit" name="submit" value="Login" />
+  </div>
+</form>
+</div>
+
+{include file="common/layout_stop.html"}
+{include file="common/html_stop.html"}

@@ -1,0 +1,6 @@
+<Files item>
+ForceType application/x-httpd-php
+</Files>
+<Files section>
+ForceType application/x-httpd-php
+</Files>

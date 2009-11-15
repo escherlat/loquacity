@@ -1,0 +1,230 @@
+/*
+Based on the original Style Sheet for the fisubsilver Theme for phpBB version 2+
+Edited by Daz
+http://www.forumimages.com
+*/
+/* General page style. The scroll bar colours only visible in IE5.5+ */
+
+body{
+background: #f0f0f0;
+font:12px Verdana,Arial,Helvetica,sans-serif;
+scrollbar-3dlight-color: #000000;
+scrollbar-arrow-color: #336633;
+scrollbar-darkshadow-color: #000000;
+scrollbar-face-color: #ffffff;
+scrollbar-highlight-color:#ffffff;
+scrollbar-shadow-color: #f0f0f0;
+scrollbar-track-color: #ffffff;
+margin: 0px; }
+
+/* General font families for common tags */
+font,th,td,p{font:12px Verdana,Arial,Helvetica,sans-serif}
+a:link,a:active,a:visited,a.postlink:link{color:#666;text-decoration: none; font-weight: bold;}
+a:hover{color:#f60;text-decoration:none;}
+.postbody{font-size:12px}
+
+hr{border:0px solid #d1d7dc; border-top-width:1px; height:0px}
+
+/* This is the border line & background colour round the entire page */
+.bodyline{background:#ffffff;border:1px solid #000000}
+
+/* This is the outline round the main forum tables */
+.forumline{background: #000000;border: 0px}
+
+/* This is for the error messages that pop up */
+.errorline	{ background-color: #add8e6; border:1px solid #98aab1}
+
+/* Main table cell colours and backgrounds */
+td.row1{background:#fefefe}
+td.row2{background:#f5f5f5}
+td.row3{background:#fefefe}
+
+/*
+This is for the table cell above the Topics,Post & Last posts on the index.php page
+By default this is the fading out gradiated silver background.
+However,you could replace this with a bitmap specific for each forum
+*/
+td.rowpic{background:#dcdcdc}
+
+/* Header cells - the blue and silver gradient backgrounds */
+th {color:#000000; background:#eaeaea; font-size:11px; font-weight:bold; height:25px}
+
+td.cat,td.cathead,td.catsides,td.catleft,td.catright,td.catbottom{
+background:#dcdcdc; border-width:1px; height:28px}
+
+/*
+Setting additional nice inner borders for the main table cells.
+The names indicate which sides the border will be on.
+Don't worry if you don't understand this,just ignore it:-)
+*/
+td.cat,td.cathead,td.catbottom{border-width:0px; height:28px}
+th.thhead,th.thsides,th.thtop,th.thleft,th.thright,th.thbottom,th.thcornerl,th.thcornerr{
+border-width:0px; font-weight:bold; height:28px}
+
+td.row3right,td.spacerow{background:#e3e3e3; border-width:0px}
+
+
+/* The largest text used in the index page title and toptic title etc. */
+.maintitle,h1{color:#000000; font:bold 20px/120% "Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+text-decoration:none}
+
+.subtitle,h2{color:#000000; font:bold 18px/180% "Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+text-decoration:none}
+
+/* General text */
+.gen{font-weight:bold}
+.genmed{font-size:11px}
+.gensmall{font-size:10px}
+
+/* Forum category titles and forum links*/
+.cattitle,.forumlink{font-weight:bold; letter-spacing:1px}
+a.cattitle,a.cattitle:visited{font-weight:bold; letter-spacing:1px; color:#767676;text-decoration:none}
+
+/* Used for the navigation text,(Page 1,2,3 etc) and the navigation bar when in a forum */
+.nav{font-size:11px;font-weight:bold}
+
+/* titles for the topics:could specify viewed link colour too */
+.topictitle{color:#000000;font-size:11px;font-weight:bold}
+a.topictitle:hover{color:#dd6900}
+
+/* Name of poster in viewmsg.php and viewtopic.php and other places */
+.name{color:#000000;font-size:11px}
+
+/* Location,number of posts,post date etc */
+.postdetails{color:#000000;font-size:10px}
+
+/* The content of the posts (body of text) */
+a.postlink:visited{color:#5493b4;text-decoration:none}
+
+/* Quote & Code blocks */
+.code{background:#fafafa; border:#fca 1px dashed; font:11px Courier,'Courier New',sans-serif;}
+
+.quote{background:#fafafa; border:1px solid #d1d7dc; color:#444444;
+font:11px/125%  Verdana,Arial,Helvetica,sans-serif}
+
+/* Copyright and bottom info */
+.copyright{font:10px Verdana,Arial,Helvetica,sans-serif}
+a.copyright{color:#444444}
+a.copyright:hover{color:#000000;text-decoration:underline}
+p.copyright { text-align: center;}
+/* Form elements */
+input,textarea,select{border-color:#000000; color:#000000;
+font:normal 11px Verdana,Arial,Helvetica,sans-serif}
+
+/* The text input fields background colour */
+input.post,textarea.post,select{background:#ffffff; font:normal 11px Verdana,Arial,Helvetica,sans-serif}
+input{text-indent:2px}
+
+/* The buttons used for bbCode styling in message post */
+input.button{
+background: #ffffff; color:#000000; font:11px Verdana,Arial,Helvetica,sans-serif}
+
+/* The main submit button option */
+input.mainoption{background: #ffffff;font-weight:bold}
+
+/* None-bold submit button */
+input.liteoption{background: #ffffff;font-weight:normal}
+
+/* This is the line in the posting page which shows the rollover
+help line. This is actually a text box,but if set to be the same
+colour as the background no one will know;)
+*/
+.helpline{background:#f5f5f5;border-style:none}
+
+/* Import the fancy styles for IE only (NS4.x doesn't use the @import function) */
+@import url("formie.css");
+
+body {
+font: 100% verdana, arial, sans-serif;
+background-color: #f0f0f0;
+margin: 0px;
+padding: 0px;
+}
+
+#top {
+ background: url(/logobg.gif);
+ padding-left: 12%;
+ margin-top: 10px;
+ margin-bottom: 10px;
+}
+
+
+#main {
+	background: #fff;
+	margin-left: 10%;
+	margin-right: 10%;
+	border-left: #666 1px solid;
+	border-right: #666 1px solid;
+	border-bottom: #666 1px solid;
+}
+#nav {
+	background: #f0f0f0;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+h1 {
+     font-size:18px; font-family: sans-serif; color: #333;font-weight: bold; border-bottom: #999 1px solid; margin-left: 3px; margin-top: 2px; margin-bottom: 2px;
+}
+h2 {
+     font-size:16px; font-family: sans-serif; color: #333;margin-left: 5px; margin-top: 2px; margin-bottom: 2px; font-weight: bold;
+}
+h3 {
+     font-size:14px; font-family: sans-serif; color: #333;margin-left:6px; margin-bottom: 2px;margin-top: 2px; font-weight: bold;
+}
+p { margin-left: 8px; margin-top: 2px;}
+p.ns {
+     font-size:12px; font-family: sans-serif; color: #333;padding: 3px;
+}
+#nav ul {
+font: bold 11px verdana, arial, sans-serif;
+list-style-type: none;
+padding-bottom: 24px;
+padding-left: 20px;
+background: #f0f0f0;
+border-bottom: 1px solid #666;
+margin: 0px;
+}
+
+#nav ul li {
+float: left;
+margin: 2px 2px 0 2px;
+border: 1px solid #666;
+background-color: #ddd;
+}
+
+#nav ul li.active {
+border-bottom: 1px solid #ffffff;
+background-color: #ffffff;
+}
+
+#nav a {
+display: block;
+color: #666;
+text-decoration: none;
+padding: 4px;
+}
+
+#nav a:hover {
+background: #ff9;
+color: #f60;
+}
+
+#foot {
+  margin-left: 10%;
+  margin-right: 10%;
+  border-left: #999 1px solid;
+  border-right: #999 1px solid;
+  border-bottom: #999 1px solid;
+  font-size: 10px;
+  font-face: verdana;
+  color: #999;
+  text-align: center;
+  background: #f6f6f6;
+}
+.wikitext,.wikiaction,.wiki { font-size: 12px; color: #000; }
+#wikibuttons { font-size: 11px; color: #333; margin:0px; background: #666; padding: 2px; text-align: center; border-top: #333 1px dotted;}
+#wikibuttons a { margin: 2px; font-size: 10px; padding: 2px; color: #fff;}
+#wikibuttons a:hover { color: #f60;}
+
+#phpcode { padding: 4px; margin-left: 10px; margin-right: 10px; margin-top: 4px; background: #f6f6f6; border: #999 1px dashed; margin-bottom: 4px;}
+

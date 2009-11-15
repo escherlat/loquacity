@@ -1,0 +1,47 @@
+<table cellpadding="0" cellspacing="0" class="list">
+<tr>
+<th>URL Name</th>
+<th>Display Name</th>
+<th>&#160;</th>
+</tr>
+{section name=s loop=$esections}
+<form action="index.php" method="post">
+  <input type="hidden" name="b" value="plugins">
+  <input type="hidden" name="p" value="sections">
+  <input type="hidden" name="sname" value="{$esections[s]->name}">
+
+  <tr class="{cycle values="high,low"}">
+    <td>{$esections[s]->name}</td>
+    <td>
+      <input type="text" name="nicename" value="{$esections[s]->nicename}" class="text"/>
+    </td>
+    <td class="action">
+      <input type="submit" name="sectdo" value="Save" class="submit"/>
+      <input type="submit" name="sectdo" value="Delete" onclick="return confirm('Do you really want delete this section?');" class="submit">
+    </td>
+  </tr>
+</form>
+{/section}
+</table>
+
+
+<form action="index.php" method="post" style="margin-top:20px">
+<input type="hidden" name="b" value="plugins">
+<input type="hidden" name="p" value="sections">
+<input type="hidden" name="sectdo" value="new">
+
+<h3>New Section</h3>
+<h4>URL Name</h4>
+<div class="frame" title="only lower case a-z">
+  <input type="text" name="urlname" class="text"/>
+</div>
+
+<h4>Display Name</h4>
+<div class="frame" title="used as link text">
+  <input type="text" name="nicename" class="text"/>
+</div>
+
+<div class="button">
+  <input type="submit" name="submit" value="Create new section" class="submit"/>
+</div>
+</form>

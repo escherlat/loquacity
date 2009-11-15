@@ -1,0 +1,39 @@
+{include file="common/html_start.html"}
+{include file="common/layout_start.html"}
+
+{if $showmessage}
+     {include file="common/message.html"}
+{/if}
+
+<form action='index.php' method='post' name='about' />
+<input type='hidden' name='b' value='about' />
+<div class='frame'>
+<p>bBlog was initialy an experiment on how far you could go with <a href='http://smarty.php.net/' target='_blank'>the Smarty templating system</a>. The answer : pretty far.</p>
+<p>
+
+</p>
+</div>
+
+
+<h4>Credits</h4>
+<div class='frame'>
+<ul style='margin-left: 20px; list-style: square;'>
+{foreach from=$credits item=c}
+	<li>{$c}</li>
+{/foreach}
+</ul>
+</div>
+
+<h4>Licence</h4>
+<div class='frame'>
+<textarea rows="8" cols="80" style="border: 1px solid #333; background: #f0f0f0; font-size:10px;" readonly>{$licence}</textarea>
+</div>
+
+<h4>Bookmarklet</h4>
+<div class="frame">
+{$bookmarklet}
+</div>
+
+</form>
+{include file="common/layout_stop.html"}
+{include file="common/html_stop.html"}

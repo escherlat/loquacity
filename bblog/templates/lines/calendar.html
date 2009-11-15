@@ -1,0 +1,46 @@
+{literal}
+<style type="text/css">
+<!--
+-->
+</style>
+
+<SCRIPT language="Javascript">
+
+var cc = new Array();
+
+function showlinks(day) {
+
+    document.getElementById('Cal').innerHTML = cc[day];
+  
+}
+  
+{/literal}
+
+{$values}
+
+</SCRIPT>
+
+<TABLE WIDTH="170" CLASS="calendartab">
+    <TR>
+	<TD align="CENTER" colspan="7" class="calendarHeader"><A href="{$left}">&laquo;</A> {$header} <A href="{$right}">&raquo;</A></TD>
+    </TR>
+    <TR>
+	{section name=wday loop=$wday}
+	    <TD align="CENTER" class="calendarHeader">{$wday[wday]}</TD>
+	{/section}
+    </TR>
+    {section name=week loop=$month}
+	<TR>
+	    {section name=day loop=$month[week]}
+		<TD align="RIGHT" class="{if $month[week][day][2]}calendarToday{else}calendar{/if}">
+		    {if $month[week][day][0]}
+			<A class="calDayLink" href="javascript:showlinks({$month[week][day][1]})">{$month[week][day][1]}</a>
+		    {else}
+			{$month[week][day][1]}
+		    {/if}
+		</TD>
+	    {/section}
+	</TR>
+    {/section}
+</TABLE>
+<div id="Cal">&nbsp;</div>	

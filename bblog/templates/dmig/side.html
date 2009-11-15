@@ -1,0 +1,37 @@
+<!-- side starts here -->
+<div id="links" class="box">
+ 
+<!-- calendar will mess up validity. remove it and you are xhtml transitional valid! -->	
+	
+		
+	<div class="box1">
+		<div class="sidetitle">Navigation</div>	
+	</div><!-- .box1-->
+	<div class="box2" >
+			<div class="side">
+				<ul><!--  remove this when updating, because links in 0.7.4 doesn't support mode=list -->
+			{links cat="Navigation" presep ='<li>' sep='</li>' mode='list'}
+				</ul><!-- remove this when updating -->
+			</div><!-- .side -->	
+	</div><!-- .box2 -->
+
+<div class="box1">
+	<div class="sidetitle">Earlier Posts</div>
+	</div><!-- .box1-->
+<div class="box2">
+	<div class="side">
+		{recentposts skip='10' mode='list' sep=''}
+	</div><!-- .side -->	
+</div><!-- .box2 -->
+
+<div class="box1">
+	<div class="sidetitle">Sections</div>
+	</div><!-- .box1-->
+<div class="box2">
+	<div class="side">
+		{sectionlinks mode='list'}
+	</div><!-- .side -->		
+</div><!-- .box2 -->
+
+	
+</div><!-- #links .box-->

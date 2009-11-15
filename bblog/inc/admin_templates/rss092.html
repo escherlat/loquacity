@@ -1,0 +1,16 @@
+<rss version="0.92">
+  <channel>
+    <title>{$smarty.const.C_BLOGNAME|htmlspecialchars}</title>
+    <link>{$smarty.const.C_BLOGURL}</link>
+    <description>{$smarty.const.C_BLOG_DESCRIPTION}</description>
+    <language>en</language>
+    {foreach from=$posts item=post}
+    <item>
+      <title>{$post.title|htmlspecialchars}</title>
+      <description>{$post.body|htmlspecialchars}</description>
+      <pubDate>{$post.posttime|date_format:"rss92"}</pubDate>
+      <link>{$post.permalink}</link>
+    </item>
+    {/foreach}
+  </channel>
+</rss>

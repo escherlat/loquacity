@@ -1,0 +1,5 @@
+<div id="teaser">
+  {section name=m loop=$menu}
+    <a {if $menu[m].active} class="active"{/if} title="{$menu[m].title}"  href="{$menu[m].url}"{$menu[m].target}>{$menu[m].name}</a>
+  {/section}
+</div>

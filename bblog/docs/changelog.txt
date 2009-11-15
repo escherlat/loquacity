@@ -1,0 +1,69 @@
+	*====================*
+	|                    |
+	| bBlog's CHANGELOG: | www.bblog.com
+	|                    |
+	*====================*
+
+For further and latest information, see: http://www.bblog.com/wiki/index.php/Change_Log
+
+Underline:
+============================================================
+(+) Added something
+(-) Removed something
+(u) Updated something
+(!) Bugfixed something (should include bug tracking number)
+
+=====================
+=== Version 0.7.6 ===
+=====================
+
+# (+) database changes: Added VERSION to bB_config table.
+# (+) Moved 0.7.5.1 to 0.7.6
+# (+) Flyspray #69: Added "Check All" to comment admin panel.
+# (-) Removed Kubrik and Relaxation as they do not meet the standards for 0.7.5/6
+# (u) Enhanced directory contents and reduced .tar.gz file size.
+# (!) Flyspray #47: Blank page after logging in fixed.
+# (!) Flyspray #44: No need for 2 message.html
+# (!) Flyspray #50: blog name + title showup messed in admin
+# (!) Flyspray #65: line spacing and archive listing all months for Kubrik and Relaxation themes.
+# (!) Flyspray #64: Removed die() which prevents integration.
+# (!) Flyspray #54: Updated max post to 20.
+# (!) Flyspray #66: mail.php now has the right charset.
+# (!) Flyspray #67: fixed sql exploit /?postid=something evil
+# (!) Flyspray #68: Removed limit when choosing individual posts via comment admin panel.
+
+=====================
+=== Version 0.7.5 ===
+=====================
+
+# (+) database changes: added values CHARSET and DIRECTION to config table
+# (!) post.html: kses modifier switched positions with nl2br modifier, so kses works correctly now.
+# (!) Flyspray #26: fixed edit timestamp 24h/12h bug in adminpanel
+# (!) Flyspray #27: correct support of Smarty date_format
+# (!) Flyspray #12,Flyspray #25: Implemented a pulldown menu in options, to change blog's global charset. default: UTF-8
+# (!) Flyspray #33: When editing an entry's timestamp, you can now enter a single digit day number.
+# (!) Flyspray #35: Fixed licence agreement checkbox
+# (!) Flyspray #19: Special characters (especially quotes: ") now working for blog name/description
+# (!) Flyspray #39: Entering code (html, java... malicious, or not) in blog descript./name now being displayed as safe plaintext.
+# (+) support of numbers and some special characters in template names
+# (+) LTR/RTL switcher added to admin panel for multilingual support. depends on support of templates.
+# (+) Flyspray #34: When installing bblog, user password will be double checked
+# (+) next/previous links to browse through all the pages
+# (+) Flyspray #7: checkboxes to delete mass comments (spam...)
+# (u) collected all scattered documentation, put them in bblog/docs folder, updated them
+# (u) displaying passwords during install as ***
+# (+) added bBlog only template "dmig"
+
+===================
+=== Version 0.7 ===
+===================
+
+* (u) Updated builtin_help.php and help.html template in order to display extended information about author, license and stuff...
+* (+) Added function_getsections.php to the /bblog/bBlog_plugins folder. {getsections} is now an official plugin.
+* (u) Updated CVS Smarty Version from 2.5.0 to 2.6.0 RC1 (PHP5 Compliant)
+
+===================
+=== Version 0.6 ===
+===================
+
+Changelog started here, no changelog provided for versions prior to 0.7 

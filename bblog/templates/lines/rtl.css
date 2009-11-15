@@ -1,0 +1,8 @@
+
+/*
+if you want to try to make a RTL-compatible template, this
+is the best way to start to overwrite some values
+
+body{ direction: rtl;}
+
+*/

@@ -1,0 +1,24 @@
+
+{foreach from=$posts item=post}
+{if $post.newday}<h2 class="date">{$post.posttime|date_format:s2}</h2>{/if}
+<div class="blogbody">
+<h3 class="title">{$post.title}</h3>
+
+{$post.body}
+<div class="posted">{sectionlinks sep=" &middot; " sections=$post.sections} &#8226; <a href="{$post.permalink}">{$post.commentcount} Comments/Trackbacks</a></div>
+</div>
+{/foreach}
+</div>
+</div>
+<div id="links">
+
+<div class="sidetitle">Navigation</div>
+<div class="side">
+{links cat="Navigation"}
+</div>
+
+<div class="sidetitle">Earlier Posts</div>
+<div class="side">
+{recentposts skip=10}
+</div>
+{include file="footer.html"}

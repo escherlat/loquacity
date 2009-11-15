@@ -1,0 +1,57 @@
+
+<form method="POST" action="index.php" name="rssfeedmaker">
+<input type='hidden' name='b' value='plugins' />
+<input type='hidden' name='p' value='rssfeedmaker' />
+<input type='hidden' name='sub' value='y' />
+{if $results}
+<h4>Your Custom RSS Feed URL</h4>
+<div class='frame'>
+<p>Your URL has been generated : <a href='{$feedurl}'>Bookmark It</a>.
+</div>
+{else}
+<div class='frame'>
+<p>The RSS Feed maker is a simple utility to enable you to create custom RSS feeds.
+<br />Simply select options below, and a URL to a custom RSS feed based on your selections will be generated.</p>
+</div>
+
+<table cellpadding="0" cellspacing="0" class="list">
+
+  <tr>
+    <th style='width:33%'>Number of posts</th>
+    <td><input type='text' class="text" name='num' value='10'/></td>
+  </tr>
+  <tr>
+    <th style='width:33%'>Section</th>
+    <td><select name='sectionid'><option value='0'>All</option>{$sectionlist}</select></td>
+  </tr>
+
+
+  <tr>
+    <th style='width:33%'>Year (4 digit)</th>
+    <td><input type='text' class="text" name='year' value='' /></td>
+  </tr>
+
+  <tr>
+    <th style='width:33%'>Month (2 digit)</th>
+    <td><input type='text' class="text" name='month' value='' /></td>
+  </tr>
+
+  <tr>
+
+    <th style='width:33%'>Day (2 digit)</th>
+    <td><input type='text' class="text" name='day' value='' /></td>
+  </tr>
+
+  <tr>
+    <th style='width:33%'>RSS/Atom Version</th>
+    <td><select name='version'><option value='2'>2.0</option><option value='0.92'>0.92</option><option value='atom03'>Atom 0.3</option></select></td>
+  </tr>
+
+  <tr><td colspan='2'><input type='submit' class='submit' name='submit' value='Generate!'/></td></tr>
+
+
+</table>
+
+
+{/if}
+</form>

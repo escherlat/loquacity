@@ -1,0 +1,86 @@
+{include file="common/html_start.html"}
+{include file="common/layout_start.html"}
+
+{if $showmessage}
+{include file="common/message.html"}
+{/if}
+
+{if $editpost}
+<form action='index.php' method='post' name='post'>
+<input type='hidden' name='b' value='archives'>
+<input type='hidden' name='postid' value='{$postid}'>
+<input type='hidden' name='postedit' value='true'>
+{include file="common/post_edit.html"}
+
+</form>
+{/if}
+
+
+{if $showarchives ne "no"}
+{$archiveemssage}
+<form action='index.php' method='post'>
+<div class='frame'>
+<input type='hidden' name='b' value='archives' />
+<input type='hidden' name='filter' value='true' />
+Show 
+<select name='shownum'>
+<option value='20' {if $smarty.post.shownum eq 20} selected{/if}>20</option>
+<option value='50' {if $smarty.post.shownum eq 50} selected{/if}>50</option>
+<option value='100' {if $smarty.post.shownum eq 100} selected{/if}>100</option>
+</select>
+ posts in
+<select name='showsection'>
+ <option value='any'>Any</option>
+ {foreach from=$sections item=section}
+ <option value='{$section->sectionid}' {if $smarty.post.showsection eq $section->sectionid} selected{/if}>{$section->nicename}</option>
+ {/foreach}
+ </select>
+ section, 
+ from <select name='showmonth'>
+ <option value='any'>any month</option>
+ {foreach from=$postmonths item=postmonth}
+ <option value='{$postmonth.numeric}' {if $smarty.post.showmonth eq $postmonth.numeric} selected{/if}>{$postmonth.desc}</option>
+ {/foreach}
+ </select>
+  <input type='submit' value='Go' name='go' />
+ </div>
+ </form>
+
+<table cellpadding="0" cellspacing="0" class="list">
+<tr>
+<th>Posted</th>
+<th>Title</th>
+<th>Status</th>
+<th>Author</th>
+<th></th>
+</tr>
+
+{section name=ar loop=$archives}
+<tr class="{cycle values="high,low"}">
+  <td>
+    {$archives[ar].posttime|date_format:"shortdate"}, {$archives[ar].posttime|date_format:"time"}
+  </td>
+  <td class="title">{$archives[ar].title}</td>
+  <td>{$archives[ar].status}</td>
+  <td>{$archives[ar].author.nickname}</td>
+  <td style="white-space:nowrap" class="action">
+    <form action="index.php" method="post" style="display:inline">
+      <input type="hidden" name="b" value="archives"/>
+      <input type="hidden" name="edit" value="{$archives[ar].id}"/>
+      <input type="submit" value="Edit" class="submit"/>
+    </form>
+    <form action="index.php" method="post" style="display:inline">
+      <input type="hidden" name="b" value="archives"/>
+      <input type="hidden" name="delete" value="{$archives[ar].id}"/>
+      <input type="submit" value="Delete" class="submit"/>
+    </form>
+  </td>
+</tr>
+{/section}
+
+</table>
+{/if}
+
+{include file="common/layout_stop.html"}
+{include file="common/html_stop.html"}
+

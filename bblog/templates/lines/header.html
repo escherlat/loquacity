@@ -1,0 +1,29 @@
+{if $charset != ''}
+<?xml version="1.0" encoding="{$charset}"?>
+{/if}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  	{if $charset != ''}
+  	<meta http-equiv="content-type" content="text/html; charset={$charset}" />
+    {/if}
+    <meta http-equiv="Content-Type" content="text/html" />
+    <title>{$title}</title>
+    <meta name="description" content="{$metadescription}" />
+    <meta name="keywords" content="{$metakeywords}" />
+    <link rel="stylesheet" type="text/css" href="{$bblogurl}templates/lines/lines.css" />
+		{if $direction == 'RTL'}
+		<link rel="stylesheet" type="text/css" href="{$bblogurl}templates/lines/rtl.css" />
+		{/if}
+		
+		
+</head>
+<body>
+<div id="banner">
+    <h1><a href="{$blogurl}">{$blogname}</a></h1>
+      <span class="description">{$blogdescription}</span>
+</div>
+<div id="content">
+      <div class="blog">
+
+

@@ -1,0 +1,10 @@
+xLib ChangeLog
+================================================================================
+ 0.1
+ * Initial Release
+--------------------------------------------------------------------------------
+ 0.1.1
+ * Added some package stuff: README, LICENCE, CHANGELOG
+ * Fixed a bug in xBrowser.js, which stops Internet Explorers Javascript Engine
+ * Fixed a bug in xBrowser.js with Internet Explorer 4 detection
+--------------------------------------------------------------------------------

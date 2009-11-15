@@ -1,0 +1,392 @@
+body{
+  font-size: 12px;
+  font-family: "Bitstream Vera Sans", Verdana, "Lucida Grande", "Lucida", sans-serif;
+  margin: 0;
+  padding: 0px;
+  background-color: #f1f1f1;
+}
+
+table, img, a, form{
+  margin: 0;
+  padding: 0;
+  border: 0 none;
+}
+
+ul{
+  list-style-type: square;
+}
+
+tr{
+  vertical-align: top;
+}
+
+tr.low td{
+  background-color: #f1f1f1;
+}
+
+th{
+  text-align: left;
+  font-weight: bold;
+  background-color: #cdcdcd;
+  padding: 3px 5px 3px 5px;
+}
+
+
+
+
+/*
+    INPUT-TABLE (post_edit.html)
+*/
+
+table.input{
+  width: 100%;
+  border: 1px solid #bdbdb1;
+  border-bottom: 0 none;
+  
+}
+
+table.input h4{
+  background-color: #bdbdb1;
+  padding: 2px 4px 2px 4px;
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+table.input tr td{
+  border-bottom: 1px solid #bdbdb1;
+  padding-bottom: 12px;
+}
+
+
+/*
+    LIST-TABLE (post_edit.html)
+*/
+
+table.list{
+  width: 100%;
+  border: 1px solid #000;
+  margin: 0;
+}
+
+table.list tr{
+  vertical-align: middle;
+}
+
+table.list tr td{
+  font-size: 12px;
+  padding: 2px 3px 2px 3px;
+  height: 25px;
+}
+
+td.action{
+  text-align: right;
+}
+
+
+
+div#header{
+	/*
+	background-color: #444;
+  */
+	background-image: url(admin_header_trans.png);
+	background:-repeat: repeat-x ;
+	background-position: bottom;
+	
+	color: #fff; 
+  position: fixed;
+  
+  
+  top: 0;
+  left: 0;
+  margin: 0px;
+  width: 100%;
+  height: 60px;
+}
+
+div#header div{
+
+  right: 5px;
+  position: absolute;
+  top: 5px;
+
+}
+
+div#header div a:link,
+div#header div a:visited
+{
+  border: 1px solid #f1f1f1;
+  text-decoration: none;
+  display: block;
+  color: #fff;
+  margin: 2px;
+  font-weight: bold;
+  font-size: 11px;
+  padding: 2px 4px 2px 4px;
+}
+
+div#header div a:hover,
+div#header div a:active
+{
+  color: #fff;
+  background-color: #444;
+}
+
+div#header h1{
+  font-size: 20px;
+  margin: 10px 20px 0 20px;
+  font-family: "Bitstream Vera Serif", "Palatino Linotype", "Georgia", "Times New Roman", serif;
+}
+
+div#header h2{
+  font-size: 12px;
+  margin: 0 20px 0 40px;
+  color: #444;
+}
+
+div#header {  }
+
+/*
+    CONTENT
+*/
+
+div#teaser, div#content{
+	margin-top: 60px;
+}
+
+div#content{
+  margin-left: 140px;
+  margin-right: 20px;
+}
+
+div#content.popup {
+	margin-left: 20px;
+}
+div#content.inline {
+	margin-left: 10px;
+	margin-top: 10px;
+}
+div#content ul{
+  margin: 0;
+  padding: 0;
+}
+
+div#content ul.form{
+  list-style-type: none;
+}
+
+div#content li{
+  margin: 0;
+  padding: 2px;
+}
+
+div#content h3{
+  padding: 0;
+  margin: 0;
+  background-color: #444;
+  color: #ffffff;
+  font-size: 13px;
+  letter-spacing: 2px;
+  padding: 2px 8px 2px 8px;
+  border: 1px solid #555;
+
+}
+
+div#content div.frame{
+  border: 1px solid #444;
+  border-top: 0 none;
+  padding: 4px 8px 4px 8px;
+}
+
+div#content div.button{
+  border: 1px solid #444;
+  border-top: 0 none;
+  padding: 4px 8px 4px 8px;
+  text-align: right;
+}
+
+div#message {
+	border-top: 0 none;
+	border: 1px solid $ff6600;
+	padding: 4px 8px 4px 8px;
+	background: #f0f0f0;
+}
+
+div#content h4{
+  padding: 0;
+  margin: 0;
+  background-color: #f1f1f1;
+/*  color: #565656; */
+  color:#000;
+  font-size: 11px;
+  border: 1px solid #555;
+  border-top: 0 none;
+  padding: 2px 4px 2px 4px;
+}
+
+div#content a:link,
+div#content a:visited{
+  color: #444;
+  text-decoration: none;
+}
+
+div#content a:hover,
+div#content a:active{
+  color: #444;
+  text-decoration: underline;
+}
+
+
+
+
+/*
+    FORMS
+*/
+
+div#content input.text,
+div#content textarea,
+div#content input[type=text],
+div#content input[type=password]
+{
+  border: 1px solid;
+  border-color: #959595 #cdcdcd #cdcdcd  #959595;
+  background-color: #eee;
+  padding: 2px 4px 2px 4px;
+  min-width: 100px;
+}
+
+div#content input.text:focus,
+div#content textarea:focus,
+div#content input[type=text]:focus,
+div#content input[type=password]:focus
+{
+  background-color: #fff;
+  border-color: #454545 #898989 #898989  #454545;
+}
+
+div#content input.submit{
+  border: 1px solid #000;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 1px 2px 1px 2px;
+}
+
+div#content input.submit:hover{
+  background-color: #f8f8f8;
+}
+
+
+
+
+/*
+    FOOTER
+*/
+
+div#footer{
+	clear: both;
+  bottom: 0;
+  position: fixed;
+	background-color: #444;
+	color: #fff;
+	
+  font-size: 11px;
+  margin-top: auto;
+  width: 100%;
+  padding: 5px 20px 5px 20px;
+}
+
+div#footer a:link,
+div#footer a:visited{
+  color: #ffffff;
+  text-decoration: none;
+
+}
+
+div#footer a:hover,
+div#footer a:active{
+  color: #ff6600;
+  text-decoration: none;
+}
+
+
+
+
+/*
+    TEASER
+*/
+
+div#teaser{
+  width: 100px;
+  background-color: #f1f1f1; 
+  padding: 10px;
+  padding-top: 0px;
+  margin-top: 0px;
+  float: left;
+
+}
+
+div#teaser a:link,
+div#teaser a:visited
+{
+  text-decoration: none;
+  border: 1px solid #f1f1f1;
+  
+  color: #555;
+  display: block;
+  width: 100%;
+  font-size: 10px;
+  font-weight: bold;
+  margin: 2px 6px 2px 0px;
+  padding: 4px 6px 4px 6px;
+}
+
+div#teaser a:hover{
+	color: #000;
+  border-left: 1px solid #fff;
+  border-top:  1px solid #fff;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+div#teaser a.active{
+  color: #000;
+  border-left: 1px solid #ccc;
+  border-top:  1px solid #ccc;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  
+  
+}
+div.hide {
+	display:none;
+}
+input.ts,div#content input.ts {
+  min-width: 30px;
+  width: 30px;
+}
+span.ts {
+  min-width: 30px;
+  width: 30px;
+}
+ul#tabs {
+	list-style: none;
+
+}
+ul#tabs li {
+	display: inline;
+	list-style:none;
+	padding:1px;
+	width:60px;
+	margin: 5px;
+	height: 15px;
+	background: #f0f0f0;
+	border: 1px solid #333;
+	cursor: hand;
+	cursor: pointer;
+}
+ul#tabs li.ontab {
+	background-color: #eeffee;
+}
+/* Mozilla users will see it at width: 99, and IE won't fuck up. */
+/*
+html>body textarea#postarea { width:99%; }
+*/

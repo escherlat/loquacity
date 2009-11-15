@@ -1,0 +1,118 @@
+<table cellpadding="0" cellspacing="0" class="list">
+<tr>
+<th>Link Name</th>
+<th>Link URL</th>
+<th>Category</th>
+<th>Order</th>
+<th>&#160;</th>
+</tr>
+{section name=s loop=$elinks}
+<form action="index.php" method="post">
+  <input type="hidden" name="b" value="plugins">
+  <input type="hidden" name="p" value="links">
+  <input type="hidden" name="sname" value="{$elinks[s]->nicename}">
+  <input type="hidden" name="linkid" value="{$elinks[s]->linkid}">
+
+  <tr class="{cycle values="high,low"}">
+    <td>
+      <input type="text" name="nicename" value="{$elinks[s]->nicename}" class="text"/>
+    </td>
+    <td>
+      <input type="text" name="url" value="{$elinks[s]->url}" class="text"/>
+    </td>
+    <td>
+    <select name="category">
+    <option value="0">[select category]
+    {section name=c loop=$ecategories}
+    <option {if $ecategories[c]->categoryid eq $elinks[s]->category}selected{/if} value="{$ecategories[c]->categoryid}">{$ecategories[c]->name}
+    {/section}
+    </select>
+    </td>
+    <td>
+	<input type="submit" name="linkdo" value="Up" class="submit"/>
+	<input type="submit" name="linkdo" value="Down" class="submit" />
+    </td>
+    <td class="action">
+      <input type="submit" name="linkdo" value="Save" class="submit"/>
+      <input type="submit" name="linkdo" value="Delete" onclick="return confirm('Do you really want delete this link?');" class="submit">
+    </td>
+  </tr>
+</form>
+{/section}
+</table>
+
+
+<form action="index.php" method="post" style="margin-top:20px">
+<input type="hidden" name="b" value="plugins">
+<input type="hidden" name="p" value="links">
+<input type="hidden" name="linkdo" value="New">
+
+<h3>New Link</h3>
+<h4>Link Name</h4>
+<div class="frame" title="only lower case a-z">
+  <input type="text" name="nicename" class="text"/>
+</div>
+
+<h4>URL</h4>
+<div class="frame" title="fully qualified url including http://">
+  <input type="text" name="url" value="http://" class="text"/>
+</div>
+
+<h4>Category</h4>
+<div class="frame" title="used as link text">
+  <select name="category">
+  <option value="0">[select category]
+  {section name=c loop=$ecategories}
+  <option value="{$ecategories[c]->categoryid}">{$ecategories[c]->name}
+  {/section}
+  </select>
+</div>
+
+<div class="button">
+  <input type="submit" name="submit" value="Create new link" class="submit"/>
+</div>
+</form>
+<br />
+<h3>Categories</h3>
+
+<table cellpadding="0" cellspacing="0" class="list">
+<tr>
+<th>Category Name</th>
+<th>&#160;</th>
+</tr>
+{section name=s loop=$ecategories}
+<form action="index.php" method="post">
+  <input type="hidden" name="b" value="plugins">
+  <input type="hidden" name="p" value="links">
+  <input type="hidden" name="cname" value="{$ecategories[s]->name}">
+  <input type="hidden" name="categoryid" value="{$ecategories[s]->categoryid}">
+
+  <tr class="{cycle values="high,low"}">
+    <td>
+      <input type="text" name="name" value="{$ecategories[s]->name}" class="text"/>
+    </td>
+    <td class="action">
+      <input type="submit" name="catdo" value="Save" class="submit"/>
+      <input type="submit" name="catdo" value="Delete" onclick="return confirm('Do you really want delete this category?');" class="submit">
+    </td>
+  </tr>
+</form>
+{/section}
+</table>
+
+
+<form action="index.php" method="post" style="margin-top:20px">
+<input type="hidden" name="b" value="plugins">
+<input type="hidden" name="p" value="links">
+<input type="hidden" name="catdo" value="New">
+
+<h3>New Category</h3>
+<h4>Category Name</h4>
+<div class="frame" title="only lower case a-z">
+  <input type="text" name="name" class="text"/>
+</div>
+
+<div class="button">
+  <input type="submit" name="submit" value="Create new category" class="submit"/>
+</div>
+</form>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed version="0.3"
+  xmlns="http://purl.org/atom/ns#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xml:lang="en">
+	<title>{$smarty.const.C_BLOGNAME}</title>
+	<link rel="alternate" type="text/html" href="{$smarty.const.C_BLOGURL}" />
+	<tagline>{$smarty.const.C_BLOG_DESCRIPTION}</tagline>
+	<modified>{$smarty.const.C_LAST_MODIFIED|date_format:atom}</modified>
+	<copyright>All Rights Reserved</copyright>
+	<generator url="http://www.bblog.com/" version="{$bBlog_version}">bBlog {$bBlog_version}</generator>
+	<id>tag:{$smarty.server.SERVER_NAME},{$smarty.const.C_LAST_MODIFIED|date_format:"Y:m.d"}</id>
+
+        {foreach from=$posts item=post}
+
+	<entry>
+	  	<author>
+
+			{if strlen($post.author.fullname) > 0}
+
+			<name>{$post.author.fullname}</name>
+
+			{else}
+
+			<name>{$post.author.nickname}</name>
+
+			{/if}
+
+			{if strlen($post.author.url) > 0}
+
+			<url>{$post.author.url}</url>
+
+			{/if}
+
+			{if strlen($post.author.email) > 0}
+
+			<email>{$post.author.email}</email>
+
+			{/if}
+
+		</author>
+		<title>{$post.title|strip_tags}</title>
+		<link rel="alternate" type="text/html" href="{$post.permalink}" />
+		<id>tag:{$smarty.server.SERVER_NAME},{$smarty.const.C_LAST_MODIFIED|date_format:"Y:m.d."}{$post.id}</id>
+		<modified>{$post.modifytime|date_format:atom}</modified>
+		<issued>{$post.posttime|date_format:atom}</issued>
+		<summary>{$post.body|strip_tags|truncate}</summary>
+		<content type="text/html" mode="escaped" xml:base="{$smarty.const.C_BLOGURL}">
+			<![CDATA[{$post.body|htmlspecialchars}]]>
+		</content>
+	</entry>
+
+        {/foreach}
+
+</feed>

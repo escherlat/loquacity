@@ -1,0 +1,315 @@
+/*
+This style is inspired by Design made in Germany: www.designmadeingermany.de
+converted to a bBlog skin with permission from Martin Rack: www.martinrack.de
+Made for bBlog by Dominic Frohlof: www.pixelpope.com
+Version: 0.1 beta / 2005/05/21
+*/
+
+/* reset everything to zero for full control*/
+body, h1, h2, h3, h4, h5, h6, ul, ol, li, p, table, block, div, blockquote{
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+/*----------------------------------------- */
+
+body{
+    font: normal 10px/1.5em verdana, arial, helvetica, verdana, sans-serif;
+	color: #333;
+	background-color: #E3E3E3;
+	margin: 0px;
+	padding: 25px;
+}
+
+#paper {
+	width: 746px;
+	margin-right: auto;
+	text-align: left;
+}
+ 
+h1,h2,h3,h4,h5 { margin: 0px; padding: 0px; font-family: verdana, arial, verdana, sans-serif; }
+p { margin-bottom: 10px; padding: 0px; font-family: verdana, arial, verdana, sans-serif; }
+
+h1,h2 {font-size: 11px; height: 15px;}
+h3,h4	{font-size: 11px; }
+h5,h6 {font-size: 10px;}
+
+
+
+a {
+	text-decoration: none;
+	padding: 1px 0;
+	line-height: 1.3em;
+}
+a:link		{ color: #242424; border-bottom: 1px solid #BBB; }
+a:visited	{ color: #242424; border-bottom: 1px solid #BBB;  }
+a:active	{ color: #242424; border-bottom: 1px solid #BBB;  }
+a:hover		{ color: #242424; border-bottom: 1px solid #242424; }
+
+/* the nice border style */
+.box{
+	border: 1px solid;
+	border-top-color:   #ADADAD;
+	border-left-color:  #ADADAD;
+	border-right-color: #FFFFFF;
+	border-bottom-color:#FFFFFF;
+	margin: 0px;
+}
+
+.box1, blockquote, code{
+	border: 1px solid;
+	border-top-color:   #FFFFFF;
+	border-left-color:  #FFFFFF;
+	border-right-color: #ADADAD;
+	border-bottom-color:#ADADAD;
+	padding: 15px;
+	margin: 0px;
+}
+
+.box2, textarea, input{
+	background-color: #DDDDDD;
+	border-top:  2px solid #D4D4D4;
+	border-left: 2px solid #D4D4D4;
+	border-bottom: 1px solid #ADADAD;
+	border-right:  1px solid #ADADAD;
+	padding: 15px;
+	margin: 0px;
+}
+/* border styles */
+
+code{
+	display: block;
+	margin-bottom: 10px;
+}
+
+blockquote, code{
+	padding: 5px;
+	background-color: #E3E3E3;
+	color: #000;
+	margin: 0px 0px 10px 0px; 
+}
+
+blockquote{
+	font-style: italic;
+	font-family: "Times New Roman", Times, serif;
+}
+code{
+	padding: 5px;
+	margin-bottom: 10px;
+}
+
+
+/* form stuff ---------------------------------------*/
+textarea, input{
+	padding: 3px;
+}
+.formfieldcontainer.input{ 
+}
+textarea{
+	margin: 0px;
+	outline: none;
+	display: block;
+}
+
+.formfieldcontainer{
+	width: 250px;
+}
+.formfield{
+	width: 239px;
+	padding: 3px;
+}
+.commentsfield{
+	width: 486px;
+}
+.formbutton{
+}
+.checkbox{
+	border: 0px;
+}
+#submit{
+	background-color: #EFEBEF;
+}
+
+/* header stuff ----------------------------- */
+#banner {
+	display: block;
+	font-weight: bold;
+	/* width:529px; */
+	margin-bottom: 20px;
+	font-size: 12px;
+}
+
+#banner-commentspop {
+}
+
+#banner a,
+#banner a:link,
+#banner a:visited,
+#banner a:active,
+#banner a:hover {
+}
+
+#banner h1 {
+	display: inline;
+	font-weight: bold;
+}
+
+ .description {
+	font-size: 11px;
+}	
+
+
+/* main content stuff --------------------------- */
+#content, .content{
+	float: left;
+	width:529px; 
+}
+
+#content ul, #content ol{
+	margin-bottom: 10px;
+	margin-left: 15px;
+}
+
+#content ol {
+	margin-left: 20px;
+	list-style-type: decimal;
+}
+
+#container {
+}
+
+#content .blog, #container .blog {
+}
+
+#content .blog {
+}
+
+.blogbody {
+}
+
+.blogbody a,
+.blogbody a:link,
+.blogbody a:visited {
+
+}
+.blogbody a:active,
+.blogbody a:hover {
+
+}
+
+.title	{ 
+  font-weight: bold;
+}			
+
+#menu {
+}		
+
+.date	{ 
+	margin: 15px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}			
+
+.posted	{ 
+
+}
+
+/* archive stuff -------------------- */
+#archive a{	
+	display: block;
+	margin: 0px;
+	height: 16px; /* just had to do this for IE*/
+}
+
+#archive ul, ol{
+	list-style-type: none;
+}
+#archive .month{
+	margin-top: 15px;
+}
+
+#archive .day{
+	margin-left: 15px;
+}
+
+
+/* side stuff -------------------------- */
+#links {
+	text-align: left;
+	width: 200px; 
+	float: right;
+	margin-left : 10px;
+  margin-right : auto;
+  margin-bottom: 20px;
+}
+#links a{
+	 display: block;
+	 width: 100%; 
+}
+#links ol, #links ul{
+	list-style-type: none;
+}
+
+
+.sidegroup {
+	margin-bottom: 20px;
+}
+
+.side {
+	margin: 0px;
+	padding: 0px;
+}
+
+.side a:hover {
+}
+
+.sidetitle {
+}
+
+.syndicate {
+}	
+
+.powered {
+}	
+
+/* comments ----------------------- */
+
+.comments-head{
+	color: #888;
+}
+.comments-body {
+}		
+
+.comments-post {
+	color: #888;
+	font-size: 9px;
+}	
+
+.trackback-url {
+}
+
+.trackback-body {
+}		
+
+.trackback-post {
+}
+
+.comments-head	{ 
+}		
+
+#author, #email, #url, #text, #title {
+}
+
+#footer{
+	clear: both;
+}
+
+
+
+/* calendar css */
+.calendarHeader a {display: inline; }
+.calendarToday {  font-weight: bold; color:#333;  background-color:#eee ;}
+.calDayLink { }
+.calendar {  }
+.calendartab { color: #888;}
+#Cal { margin-bottom: 0px;}

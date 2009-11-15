@@ -1,0 +1,136 @@
+{if $post_message}
+  <h3>{$post_message}</h3>
+{/if}
+
+<h4>Title</h4>
+<div class="frame">
+  <input class="text" size="40" type="text" name="title_text" value="{$title_text}" />
+</div>
+
+<h4>Entry Text</h4>
+<div class="frame">
+  <textarea wrap="virtual" class="text" name="body_text" cols="60" rows="10">{$body_text}</textarea>
+</div>
+
+<h4>Entry Modifier</h4>
+{literal}
+<script type="text/javascript">
+var win= null;
+function PluginHelp(mod){
+      var w = 450;
+      var h = 400;
+      var winl = (screen.width-w)/2;
+      var wint = (screen.height-h)/2;
+      var settings  ='height='+h+',';
+      var scroll='yes';
+      var mypage='index.php?b=help&mod='+mod;
+      settings +='width='+w+',';
+      settings +='top='+wint+',';
+      settings +='left='+winl+',';
+      settings +='scrollbars='+scroll+',';
+      settings +='resizable=yes';
+      win=window.open(mypage,'bbloghelp',settings);
+      if(parseInt(navigator.appVersion) >= 4){win.window.focus();}
+}
+</script>
+{/literal}
+<div class="frame">
+  <select name="modifier" id="modifier">
+  {section name=mods loop=$modifiers}
+    <option value="{$modifiers[mods]->name}" {if $modifiers[mods]->name eq $selected_modifier}selected="selected"{/if}/>
+      {$modifiers[mods]->nicename}
+    </option>
+  {/section}
+  </select> <input type='button' class='submit' name='showhelp' value='Show Modifier Help'  onClick="PluginHelp( document.forms.post.elements['modifier'].value);" />
+</div>
+
+
+<h4>Sections</h4>
+<div class="frame">
+<ul class="form">
+{section name=s loop=$sections}
+  <li>
+    <input class="checkbox" type="checkbox" id="s{$sections[s]->sectionid}" name="sections[]" value="{$sections[s]->sectionid}" {if $sections[s]->checked}checked='checked'{/if}/>
+    <label for="s{$sections[s]->sectionid}">{$sections[s]->nicename}</label>
+  </li>
+{/section}
+</ul>
+</div>
+
+<h4>Publication Status</h4>
+<div class="frame">
+<ul class="form">
+  <li>
+    <input class="radio" type="radio" name="pubstatus" id="draft" value="draft" {$statusdraft}/>
+    <label for="draft">Draft</label>
+  </li>
+  <li>
+    <input class="radio" type="radio" name="pubstatus" id="live" value="live" {$statuslive}/>
+    <label for="live">Live</label>
+  </li>
+</ul>
+</div>
+
+<h4>Hide from Home Page</h4>
+<div class="frame">
+<ul class="form">
+  <li>
+    <input class="checkbox" type="checkbox" name="hidefromhome" id="hidefromhome" value="hide" {$hidefromhomevalue}/>
+    <label for="hidefromhome">Do not show this post on the home page</label>
+  </li>
+</ul>
+</div>
+
+<h4>Comment Options</h4>
+<div class="frame">
+<ul class="form">
+  <li>
+    <input class="radio" type="radio" name="commentoptions" id="allowcomments" value="allow" onClick=" document.forms.post.elements['disallow_comments_after'].disabled = true;" {$commentsallowvalue}/>
+    <label for="allowcomments">Allow comments on this post</label>
+  </li>
+  <li>
+    <input class="radio" type="radio" name="commentoptions" id="timedcomments" value="timed" onClick=" document.forms.post.elements['disallow_comments_after'].disabled = false;" {$commentstimedvalue} />
+    <label for="timedcomments">Allow comments on this post but disable after </label> <select name='disallowcommentsdays' id='disallow_comments_after' {if $commentstimedvalue ne " checked='checked' "}disabled{/if}><option value='7'>1 Week</option><option value='14'>2 Weeks</option><option value='30'>30 Days</option><option value='90'>90 Days</option></select>
+  </li>
+  <li>
+    <input class="radio" type="radio" name="commentoptions" id="disallowcomments" value="disallow" onClick=" document.forms.post.elements['disallow_comments_after'].disabled = true;"  {$commentsdisallowvalue}/>
+    <label for="disallowcomments">Disallow comments on this post</label>
+  </li>
+</ul>
+</div>
+
+<h4>Send Trackback</h4>
+<div class="frame">
+  <ul class="form">
+    <li>
+      <input class="checkbox" type="checkbox" name="send_trackback" value="TRUE" id="send_trackback" onClick="document.getElementById('tb').style.display ='block';" />
+      <label for="send_trackback">
+      Send Trackback?</label>
+    </li>
+  </ul>
+  <div class="hide" id="tb">
+    <label for=tburl">URL to trackback</label>
+    <br />
+    <input class="text" size="40"  type="text" name="tburl" id="tburl"/>
+    <br />
+    Excerpt
+    <br />
+    <textarea class="text" name="excerpt" cols="50" rows="4"></textarea>
+  </div>
+</div>
+
+{if $form_type eq 'edit'}
+<h4>Edit Timestamp</h4>
+<div class="frame">
+  <ul class="form">
+    <li><input type="checkbox" class="checkbox" name="edit_timestamp" id="edit_timestamp" value="TRUE" onClick="document.getElementById('timestamp').style.display='block';"> <label for="edit_timestamp">Edit Timestamp</label>
+    </li>
+ </ul>
+ <div class="hide" id="timestamp">
+ 	{$timestampform}	
+ </div>
+</div>
+{/if}
+<div class="button">
+  <input type="submit" class="submit" name="submit" value="Save Entry" >
+</div>

@@ -1,0 +1,20 @@
+{if $charset != ''}
+<?xml version="1.0" encoding="{$charset}"?>
+{/if}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	{if $charset != ''}
+  	<meta http-equiv="content-type" content="text/html"; charset="{$charset}" />
+  {/if}
+  <title>bBlog - {$title}</title>
+  <link rel="stylesheet" type="text/css" title="Main" href="style/admin.css" media="screen" />
+
+<!-- this is included for the Check All function in comments admin -->  
+{literal}  
+<script type="text/javascript" language="javascript">var checkflag = "false";function check(field) {if (checkflag == "false") {for (i = 0; i < field.length; i++) {field[i].checked = true;}checkflag = "true";return "Uncheck All"; }else {for (i = 0; i < field.length; i++) {field[i].checked = false; }checkflag = "false";return "Check All"; }}</script>
+{/literal}
+  
+</head>
+
+<body>
