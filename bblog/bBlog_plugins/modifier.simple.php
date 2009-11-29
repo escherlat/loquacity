@@ -1,4 +1,11 @@
 <?php
+/**
+ * ./bblog/bBlog_plugins/modifier.simple.php
+ *
+ * @package default
+ */
+
+
 /*
 ** bBlog Weblog http://www.bblog.com/
 ** Copyright (C) 2003  Eaden McKee <email@eadz.co.nz>
@@ -17,21 +24,34 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-function identify_modifier_simple () {
-    return array (
-    'name'           =>'simple',
-    'type'             =>'modifier',
-    'nicename'     =>'Newlines and URLS',
-    'description'   =>'Converts breaks to newlines and URLs into clickable links',
-    'authors'        =>'Eaden McKee, phpBB Authors',
-    'licence'         =>'GPL',
-    'help'    	=> 'This is a simple modifier that simply converts new lines ( returns ) into html breaks, any urls ( e.g. http://www.bblog.com/ or www.bblog.com into clickable links.'
-  );
+
+
+/**
+ *
+ *
+ * @return unknown
+ */
+function identify_modifier_simple() {
+	return array (
+		'name'           =>'simple',
+		'type'             =>'modifier',
+		'nicename'     =>'Newlines and URLS',
+		'description'   =>'Converts breaks to newlines and URLs into clickable links',
+		'authors'        =>'Eaden McKee, phpBB Authors',
+		'licence'         =>'GPL',
+		'help'     => 'This is a simple modifier that simply converts new lines ( returns ) into html breaks, any urls ( e.g. http://www.bblog.com/ or www.bblog.com into clickable links.'
+	);
 }
-////
-// !a simple modifier combining nl2br and make clickable
-function smarty_modifier_simple ($ret) {
-                // pad it with a space so we can match things at the start of the 1st line.
+
+
+/**
+ * !a simple modifier combining nl2br and make clickable
+ *
+ * @param unknown $ret
+ * @return unknown
+ */
+function smarty_modifier_simple($ret) {
+	// pad it with a space so we can match things at the start of the 1st line.
 	$ret = ' ' . $ret;
 
 	// matches an "xxxx://yyyy" URL at the start of a line, or after a space.
@@ -52,7 +72,7 @@ function smarty_modifier_simple ($ret) {
 	// Remove our padding..
 	$ret = substr($ret, 1);
 
-     return nl2br($ret);
+	return nl2br($ret);
 }
 
 

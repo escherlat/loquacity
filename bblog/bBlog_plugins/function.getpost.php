@@ -1,5 +1,12 @@
 <?php
-// function.getposts.php 
+/**
+ * ./bblog/bBlog_plugins/function.getpost.php
+ *
+ * @package default
+ */
+
+
+// function.getposts.php
 //
 // Written by Reverend Jim <jim@revjim.net>
 //
@@ -21,31 +28,47 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-function identify_function_getpost () {
-$help = '
+
+
+/**
+ *
+ *
+ * @return unknown
+ */
+function identify_function_getpost() {
+	$help = '
 <p>The {getpost} function is used to retrieve a single post. It takes the following parameters:<br />
 <br />
 assign: variable to assign data to<br />
 postid: to request a SINGLE post';
 
-  return array (
-    'name'           =>'getpost',
-    'type'             =>'function',
-    'nicename'     =>'GetPost',
-    'description'   =>'Gets a single blog post',
-    'authors'        =>'Reverend Jim <jim@revjim.net>',
-    'licence'         =>'GPL',
-    'help'   => $help
-  );
+	return array (
+		'name'           =>'getpost',
+		'type'             =>'function',
+		'nicename'     =>'GetPost',
+		'description'   =>'Gets a single blog post',
+		'authors'        =>'Reverend Jim <jim@revjim.net>',
+		'licence'         =>'GPL',
+		'help'   => $help
+	);
 }
+
+
+/**
+ *
+ *
+ * @param unknown $params
+ * @param unknown $bBlog  (reference)
+ * @return unknown
+ */
 function smarty_function_getpost($params, &$bBlog) {
-  $ar = array();
+	$ar = array();
 
 	// If "assign" is not set... we'll establish a default.
-	if($params['assign'] == '') {
+	if ($params['assign'] == '') {
 		$params['assign'] = 'post';
 	}
-	if($params['postid'] == '') {
+	if ($params['postid'] == '') {
 		$bBlog->trigger_error('postid is a required parameter');
 		return '';
 	}
@@ -53,19 +76,20 @@ function smarty_function_getpost($params, &$bBlog) {
 	$q = $bBlog->make_post_query(array("postid"=>$params['postid']));
 
 	$ar['posts'] = $bBlog->get_posts($q);
-        
+
 	// No posts.
-  if(!is_array($ar['posts'])) {
+	if (!is_array($ar['posts'])) {
 		return false;
 	}
 
 	$ar['posts'][0]['newday'] = 'yes';
 	$ar['posts'][0]['newmonth'] = 'yes';
 
-	$bBlog->assign($params['assign'],$ar['posts'][0]);
+	$bBlog->assign($params['assign'], $ar['posts'][0]);
 
 	return '';
-        
+
 }
+
 
 ?>

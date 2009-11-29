@@ -1,9 +1,11 @@
 <?php
 /**
  * Smarty plugin
- * @package Smarty
+ *
  * @subpackage plugins
+ * @package Smarty
  */
+
 
 /**
  * Smarty {textformat}{/textformat} block plugin
@@ -12,6 +14,7 @@
  * Name:     textformat<br>
  * Purpose:  format text a certain way with preset styles
  *           or custom wrap/indent settings<br>
+ *
  * @link http://smarty.php.net/manual/en/language.function.textformat.php {textformat}
  *       (Smarty online manual)
  * @param array
@@ -23,12 +26,14 @@
  *           indent_char: string (" ")
  *           wrap_boundary: boolean (true)
  * </pre>
- * @param string contents of the block
- * @param Smarty clever simulation of a method
+ * @param string  contents of the block
+ * @param Smarty  clever simulation of a method
+ * @param unknown $params
+ * @param unknown $content
+ * @param unknown $smarty  (reference)
  * @return string string $content re-formatted
  */
-function smarty_block_textformat($params, $content, &$smarty)
-{
+function smarty_block_textformat($params, $content, &$smarty) {
 	$style = null;
 	$indent = 0;
 	$indent_first = 0;
@@ -37,46 +42,47 @@ function smarty_block_textformat($params, $content, &$smarty)
 	$wrap_char = "\n";
 	$wrap_cut = false;
 	$assign = null;
-	
-	if($content == null) {
+
+	if ($content == null) {
 		return true;
 	}
 
-    extract($params);
+	extract($params);
 
-	if($style == 'email') {
+	if ($style == 'email') {
 		$wrap = 72;
-	}	
-	
-	// split into paragraphs	
-	$paragraphs = preg_split('![\r\n][\r\n]!',$content);
+	}
+
+	// split into paragraphs
+	$paragraphs = preg_split('![\r\n][\r\n]!', $content);
 	$output = '';
 
-	foreach($paragraphs as $paragraph) {
-		if($paragraph == '') {
+	foreach ($paragraphs as $paragraph) {
+		if ($paragraph == '') {
 			continue;
 		}
 		// convert mult. spaces & special chars to single space
-		$paragraph = preg_replace(array('!\s+!','!(^\s+)|(\s+$)!'),array(' ',''),$paragraph);
+		$paragraph = preg_replace(array('!\s+!', '!(^\s+)|(\s+$)!'), array(' ', ''), $paragraph);
 		// indent first line
-		if($indent_first > 0) {
-			$paragraph = str_repeat($indent_char,$indent_first) . $paragraph;
+		if ($indent_first > 0) {
+			$paragraph = str_repeat($indent_char, $indent_first) . $paragraph;
 		}
 		// wordwrap sentences
 		$paragraph = wordwrap($paragraph, $wrap - $indent, $wrap_char, $wrap_cut);
 		// indent lines
-		if($indent > 0) {
-			$paragraph = preg_replace('!^!m',str_repeat($indent_char,$indent),$paragraph);
+		if ($indent > 0) {
+			$paragraph = preg_replace('!^!m', str_repeat($indent_char, $indent), $paragraph);
 		}
 		$output .= $paragraph . $wrap_char . $wrap_char;
 	}
-				
-	if($assign != null) {
-		$smarty->assign($assign,$output);
+
+	if ($assign != null) {
+		$smarty->assign($assign, $output);
 	} else {
 		return $output;
 	}
 }
+
 
 /* vim: set expandtab: */
 

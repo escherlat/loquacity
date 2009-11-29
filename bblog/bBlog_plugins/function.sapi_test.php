@@ -1,5 +1,12 @@
 <?php
-// function.sapi_test.php 
+/**
+ * ./bblog/bBlog_plugins/function.sapi_test.php
+ *
+ * @package default
+ */
+
+
+// function.sapi_test.php
 //
 // Written by Elie BLETON <lordwo__at__sourceforge__dot__net>
 //

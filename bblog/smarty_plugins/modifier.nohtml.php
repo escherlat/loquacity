@@ -1,8 +1,9 @@
 <?php
 /**
  * Smarty plugin
- * @package Smarty
+ *
  * @subpackage plugins
+ * @package Smarty
  */
 
 
@@ -18,15 +19,16 @@
  *         - preceed_test = if true, includes preceeding break tags
  *           in replacement
  * Example:  {$text|none}
+ *
  * @version  1.0
  * @author   Eaden McKee  <email@eadz.co.nz>
  * @param string
+ * @param unknown $string (reference)
  * @return string
  */
-
-function smarty_modifier_nohtml(&$string)
-{
-    return htmlspecialchars($string);
+function smarty_modifier_nohtml(&$string) {
+	return htmlspecialchars($string);
 }
+
 
 ?>

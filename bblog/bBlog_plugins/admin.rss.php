@@ -1,7 +1,18 @@
 <?php
-// admin.rss.php - administer rss
-function identify_admin_rss () {
-$help = '
+/**
+ * ./bblog/bBlog_plugins/admin.rss.php
+ *
+ * @package default
+ */
+
+
+/**
+ * admin.rss.php - administer rss
+ *
+ * @return unknown
+ */
+function identify_admin_rss() {
+	$help = '
 <p>
 <i>function </i><b>Get RSS</b><br>
 </p>
@@ -9,26 +20,29 @@ $help = '
 <p><b><i>example: </b></i>{getrss id=1} - select defined RSS Feed
 </p>';
 
-return array (
-    'name'           =>'rss',
-    'type'             =>'admin',
-    'nicename'     =>'RSS Fetcher',
-    'description'   =>'Edit RSS Feeds',
-    'authors'        =>'Martin Konicek <martin.konicek@atlas.cz>',
-    'licence'         =>'GPL',
-    'template' 	=> 'rss.html',
-    'help'    	=> $help
-  );
+	return array (
+		'name'           =>'rss',
+		'type'             =>'admin',
+		'nicename'     =>'RSS Fetcher',
+		'description'   =>'Edit RSS Feeds',
+		'authors'        =>'Martin Konicek <martin.konicek@atlas.cz>',
+		'licence'         =>'GPL',
+		'template'  => 'rss.html',
+		'help'     => $help
+	);
 }
 
 
+/**
+ *
+ *
+ * @param unknown $bBlog (reference)
+ */
 function admin_plugin_rss_run(&$bBlog) {
 
 	$pole = "";
-	for($i=1; $i<10; $i++) 
-	{
-		if ((isset($_POST['sending'])) && ($_POST['sending']=="true"))
-		{
+	for ($i=1; $i<10; $i++) {
+		if ((isset($_POST['sending'])) && ($_POST['sending']=="true")) {
 			$id = $_POST[id.$i];
 			$ch = $_POST[ch.$i];
 			$update_query = "UPDATE ".T_RSS." SET `url` = '".$id."',`input_charset` = '".$ch."' WHERE `id` = '".$i."' LIMIT 1 ;";
@@ -40,7 +54,7 @@ function admin_plugin_rss_run(&$bBlog) {
 		$rssurl = $row->url;
 		$w1250 = "";
 		if ($row->input_charset=="W1250") {$w1250=" selected";}
-		$utf8 = "";		
+		$utf8 = "";
 		if ($row->input_charset=="UTF8") {$utf8=" selected";}
 
 		if ($i / 2 == floor($i /2)) $class = 'high';
@@ -53,6 +67,8 @@ function admin_plugin_rss_run(&$bBlog) {
 		$pole.='</select></td></tr>';
 	}
 
-	$bBlog->assign('pole',$pole);
+	$bBlog->assign('pole', $pole);
 }
+
+
 ?>

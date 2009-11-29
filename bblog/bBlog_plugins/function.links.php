@@ -1,4 +1,10 @@
 <?php
+/**
+ * ./bblog/bBlog_plugins/function.links.php
+ *
+ * @package default
+ */
+
 
 // function.links.php - a smarty function for displaying bBlog links
 // Copyright (C) 2003  Mario Delgado <mario@seraphworks.com>
@@ -22,8 +28,14 @@
 ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-function identify_function_links () {
-$help = '
+
+/**
+ *
+ *
+ * @return unknown
+ */
+function identify_function_links() {
+	$help = '
 <p>Links is a Smarty function to be used in templates.
 <p>Example usage
 <ul><li>To return a list of links, one per line :<br>
@@ -50,75 +62,84 @@ $help = '
      Category names and ord key words are case sensative.</li>
 </ul>';
 
-  return array (
-    'name'             =>'links',
-    'type'             =>'function',
-    'nicename'         =>'Links',
-    'description'      =>'Make a list of links',
-    'authors'          =>'Mario Delgado <mario@seraphworks.com>',
-    'licence'          =>'GPL',
-    'help'             => $help
-  );
+	return array (
+		'name'             =>'links',
+		'type'             =>'function',
+		'nicename'         =>'Links',
+		'description'      =>'Make a list of links',
+		'authors'          =>'Mario Delgado <mario@seraphworks.com>',
+		'licence'          =>'GPL',
+		'help'             => $help
+	);
 
 
 }
 
+
+/**
+ *
+ *
+ * @param unknown $params
+ * @param unknown $bBlog  (reference)
+ * @return unknown
+ */
 function smarty_function_links($params, &$bBlog) {
 
-    $markedlinks = '';
+	$markedlinks = '';
 
-    if(!isset($params['sep'])) {
-       $sep = "<br />";
-    } else {
-       $sep = $params['sep'];
-    }
-    
-    if(isset($params['presep'])) $presep = $params['presep']; // use this for lists
+	if (!isset($params['sep'])) {
+		$sep = "<br />";
+	} else {
+		$sep = $params['sep'];
+	}
 
-    if(isset($params['desc'])) {
-       $asde = "DESC";
-    } else {
-       $asde = "";
-    }
+	if (isset($params['presep'])) $presep = $params['presep']; // use this for lists
 
-    if(isset($params['ord'])) {
-       $order = $params['ord'];
-    } else {
-       $order = "position";
-    }
+	if (isset($params['desc'])) {
+		$asde = "DESC";
+	} else {
+		$asde = "";
+	}
 
-    if(isset($params['num'])) {
-       $max = $params['num'];
-    } else {
-       $max = "20";
-    }
+	if (isset($params['ord'])) {
+		$order = $params['ord'];
+	} else {
+		$order = "position";
+	}
 
-    if(isset($params['cat'])) {
-       $cat = $bBlog->get_var("select categoryid from ".T_CATEGORIES." where name='".$params['cat']."'");
-    }
+	if (isset($params['num'])) {
+		$max = $params['num'];
+	} else {
+		$max = "20";
+	}
 
-    if(isset($params['notcat'])) {
-       $notcat = $bBlog->get_var("select categoryid from ".T_CATEGORIES." where name='".$params['notcat']."'");
-    }
+	if (isset($params['cat'])) {
+		$cat = $bBlog->get_var("select categoryid from ".T_CATEGORIES." where name='".$params['cat']."'");
+	}
 
-    if ($cat) {
-       $links = $bBlog->get_results("select * from ".T_LINKS." where category='".$cat."' order by ".$order." ".$asde." limit ".$max);    
-    } elseif ($notcat) {
-       $links = $bBlog->get_results("select * from ".T_LINKS." where category !='".$notcat."' order by ".$order." ".$asde." limit ".$max);    
-    } else {
-       $links = $bBlog->get_results("select * from ".T_LINKS." order by ".$order." ".$asde." limit ".$max);    
-    }
+	if (isset($params['notcat'])) {
+		$notcat = $bBlog->get_var("select categoryid from ".T_CATEGORIES." where name='".$params['notcat']."'");
+	}
+
+	if ($cat) {
+		$links = $bBlog->get_results("select * from ".T_LINKS." where category='".$cat."' order by ".$order." ".$asde." limit ".$max);
+	} elseif ($notcat) {
+		$links = $bBlog->get_results("select * from ".T_LINKS." where category !='".$notcat."' order by ".$order." ".$asde." limit ".$max);
+	} else {
+		$links = $bBlog->get_results("select * from ".T_LINKS." order by ".$order." ".$asde." limit ".$max);
+	}
 
 
-    if(!empty($links)) {
-      foreach ($links as $link) {
-              $url = $link->url;
-              $nicename = $link->nicename;
-              $markedlinks .= $presep.'<a href="'.$url.'">'.$nicename.'</a>'.$sep;
-      }
-    }
+	if (!empty($links)) {
+		foreach ($links as $link) {
+			$url = $link->url;
+			$nicename = $link->nicename;
+			$markedlinks .= $presep.'<a href="'.$url.'">'.$nicename.'</a>'.$sep;
+		}
+	}
 
-    return $markedlinks;
+	return $markedlinks;
 }
+
 
 ?>

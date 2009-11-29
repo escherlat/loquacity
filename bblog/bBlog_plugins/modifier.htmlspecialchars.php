@@ -1,4 +1,11 @@
 <?php
+/**
+ * ./bblog/bBlog_plugins/modifier.htmlspecialchars.php
+ *
+ * @package default
+ */
+
+
 /*
 ** bBlog Weblog http://www.bblog.com/
 ** Copyright (C) 2003  Eaden McKee <email@eadz.co.nz>
@@ -17,20 +24,34 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-function identify_modifier_htmlspecialchars () {
-    return array (
-    'name'           =>'htmlspecialchars',
-    'type'             =>'smarty_modifier',
-    'nicename'     =>'HTML Special Chars',
-    'description'   =>'Converts HTML Special Chars to form-friendly entities',
-    'authors'        =>'',
-    'licence'         =>'',
-    'help'    	=> ''
-  );
+
+
+/**
+ *
+ *
+ * @return unknown
+ */
+function identify_modifier_htmlspecialchars() {
+	return array (
+		'name'           =>'htmlspecialchars',
+		'type'             =>'smarty_modifier',
+		'nicename'     =>'HTML Special Chars',
+		'description'   =>'Converts HTML Special Chars to form-friendly entities',
+		'authors'        =>'',
+		'licence'         =>'',
+		'help'     => ''
+	);
 }
 
-function smarty_modifier_htmlspecialchars ($in) {
-    return htmlspecialchars($in);
+
+/**
+ *
+ *
+ * @param unknown $in
+ * @return unknown
+ */
+function smarty_modifier_htmlspecialchars($in) {
+	return htmlspecialchars($in);
 }
 
 

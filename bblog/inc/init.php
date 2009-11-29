@@ -1,4 +1,11 @@
 <?php
+/**
+ * ./bblog/inc/init.php
+ *
+ * @package default
+ */
+
+
 // init.php - Start the bBlog engine, include needed files
 // init.php - author: Eaden McKee <email@eadz.co.nz>
 
@@ -21,31 +28,31 @@
 ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 if ( ! is_dir(BBLOGROOT) ) {
- 
-  // throw meaningful error here ( OK tim ! )
-  echo "There was an error : BBLOGROOT is not a directory. Please check that you have configured bBlog correctly by checking values in config.php";
-  die();
-   
-}    
+
+	// throw meaningful error here ( OK tim ! )
+	echo "There was an error : BBLOGROOT is not a directory. Please check that you have configured bBlog correctly by checking values in config.php";
+	die();
+
+}
 // define the table names
-define('T_CONFIG',TBL_PREFIX.'config');
-define('T_POSTS',TBL_PREFIX.'posts');
-define('T_SECTIONS',TBL_PREFIX.'sections');
-define('T_MODIFIERS',TBL_PREFIX.'modifiers');
-define('T_PLUGINS',TBL_PREFIX.'plugins');
-define('T_COMMENTS',TBL_PREFIX.'comments');
-define('T_AUTHORS',TBL_PREFIX.'authors');
-define('T_LINKS',TBL_PREFIX.'links');
-define('T_CATEGORIES',TBL_PREFIX.'categories');
-define('T_RSS',TBL_PREFIX.'rss');
+define('T_CONFIG', TBL_PREFIX.'config');
+define('T_POSTS', TBL_PREFIX.'posts');
+define('T_SECTIONS', TBL_PREFIX.'sections');
+define('T_MODIFIERS', TBL_PREFIX.'modifiers');
+define('T_PLUGINS', TBL_PREFIX.'plugins');
+define('T_COMMENTS', TBL_PREFIX.'comments');
+define('T_AUTHORS', TBL_PREFIX.'authors');
+define('T_LINKS', TBL_PREFIX.'links');
+define('T_CATEGORIES', TBL_PREFIX.'categories');
+define('T_RSS', TBL_PREFIX.'rss');
 
 // legacy
-define('C_BLOGURL',BLOGURL);
+define('C_BLOGURL', BLOGURL);
 
 // prevent errors when _open_basedir is set
-ini_set('include_path','./:../');
+ini_set('include_path', './:../');
 
-define('SMARTY_DIR',	BBLOGROOT.'libs/');
+define('SMARTY_DIR', BBLOGROOT.'libs/');
 
 // include  needed files
 include BBLOGROOT.'libs/Smarty.class.php';
@@ -57,27 +64,27 @@ include BBLOGROOT.'inc/templates.php';
 
 // start your engines
 $bBlog = new bBlog();
-$mtime = explode(" ",microtime());
+$mtime = explode(" ", microtime());
 $bBlog->begintime = $mtime[1] + $mtime[0];
 
 // this is only here until I work out the best way to do theming.
 //$bBlog->clear_compiled_tpl();
 
 
-$bBlog->template_dir 	= BBLOGROOT.'templates/'.C_TEMPLATE;
+$bBlog->template_dir  = BBLOGROOT.'templates/'.C_TEMPLATE;
 $bBlog->compile_dir = BBLOGROOT.'compiled_templates/';
 
-if(defined('IN_BBLOG_ADMIN')) {
-       $bBlog->compile_id = 'admin';
-} else 	{
+if (defined('IN_BBLOG_ADMIN')) {
+	$bBlog->compile_id = 'admin';
+} else {
 	$bBlog->compile_id = C_TEMPLATE;
 }
 
-$bBlog->plugins_dir = array(BBLOGROOT.'bBlog_plugins',BBLOGROOT.'smarty_plugins');
-$bBlog->use_sub_dirs	= FALSE; // change to true if you have a lot of templates
+$bBlog->plugins_dir = array(BBLOGROOT.'bBlog_plugins', BBLOGROOT.'smarty_plugins');
+$bBlog->use_sub_dirs = FALSE; // change to true if you have a lot of templates
 
-define('BBLOG_VERSION',"0.7.6");
-$bBlog->assign("bBlog_version",BBLOG_VERSION);
+define('BBLOG_VERSION', "0.7.6");
+$bBlog->assign("bBlog_version", BBLOG_VERSION);
 
 // if you want debugging, this is the place
 // you'd turn on debugging by adding ?gdb=true to the end of a url
@@ -90,7 +97,7 @@ $bBlog->assign("bBlog_version",BBLOG_VERSION);
 // change this to false for a peformance increase,
 // but you won't be able to use smarty tags in posts.
 // disabled by default as you may have use { or } in posts which will confuse everything
-define('USE_SMARTY_TAGS_IN_POST',FALSE);
+define('USE_SMARTY_TAGS_IN_POST', FALSE);
 
 
 ?>

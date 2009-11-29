@@ -1,3 +1,12 @@
+<?php
+/**
+ * ./bblog/install/footer.php
+ *
+ * @package default
+ */
+
+
+?>
 
 </form>
 <br/><br/><br/>

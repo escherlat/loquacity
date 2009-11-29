@@ -1,6 +1,14 @@
 <?php
-function identify_function_sectionlinks () {
-$help = '
+/**
+ * ./bblog/bBlog_plugins/function.sectionlinks.php
+ *
+ * @package default
+ * @return unknown
+ */
+
+
+function identify_function_sectionlinks() {
+	$help = '
 <p>Sectionlinks is a Smarty function to be used in templates.
 <p>Example usage
 <ul><li>To create a link list of sections, one per line :<br>
@@ -13,62 +21,71 @@ $help = '
 </ul>';
 
 
-  return array (
-    'name'           =>'sectionlinks',
-    'type'             =>'function',
-    'nicename'     =>'Section Links',
-    'description'   =>'Make links to sections',
-    'authors'        =>'Eaden McKee <eadz@bblog.com>',
-    'licence'         =>'GPL',
-    'help'   => $help
-  );
+	return array (
+		'name'           =>'sectionlinks',
+		'type'             =>'function',
+		'nicename'     =>'Section Links',
+		'description'   =>'Make links to sections',
+		'authors'        =>'Eaden McKee <eadz@bblog.com>',
+		'licence'         =>'GPL',
+		'help'   => $help
+	);
 
 
 }
 
+
+/**
+ *
+ *
+ * @param unknown $params
+ * @param unknown $bBlog  (reference)
+ * @return unknown
+ */
 function smarty_function_sectionlinks($params, &$bBlog) {
 
-    $linkcode = '';
+	$linkcode = '';
 
-    if(!isset($params['mode'])) $mode = "break";
-    else $mode = $params['mode'];
+	if (!isset($params['mode'])) $mode = "break";
+	else $mode = $params['mode'];
 
-    if($mode=='list') $sep = "";
-    else if(!isset($params['sep'])) $sep = "<br />";
-    else $sep = $params['sep'];
+	if ($mode=='list') $sep = "";
+	else if (!isset($params['sep'])) $sep = "<br />";
+		else $sep = $params['sep'];
 
-    if(isset($params['sections'])) $sections = $params['sections'];
-    else $sections = $bBlog->sections;
+		if (isset($params['sections'])) $sections = $params['sections'];
+		else $sections = $bBlog->sections;
 
-    $num = count($sections);
-    $i=0;
-  
-    if ($mode=='list') $linkcode .= "<ul>";
+		$num = count($sections);
+	$i=0;
 
-    foreach ($sections as $section) {
-            $i++;
-            // we using arrays in the template and objects in the core..
-            if(isset($params['sections'])) {
-                   $url = $section['url'];
-                   $nicename = $section['nicename'];
-            } else {
-                   $url = $section->url;
-                   $nicename = $section->nicename;
-            }
+	if ($mode=='list') $linkcode .= "<ul>";
 
-            if($mode=='list') $linkcode .= "<li>";
+	foreach ($sections as $section) {
+		$i++;
+		// we using arrays in the template and objects in the core..
+		if (isset($params['sections'])) {
+			$url = $section['url'];
+			$nicename = $section['nicename'];
+		} else {
+			$url = $section->url;
+			$nicename = $section->nicename;
+		}
 
-            $linkcode .= '<a href="'.$url.'">'.$nicename.'</a>';
+		if ($mode=='list') $linkcode .= "<li>";
 
-            if($mode=='list') $linkcode .= "</li>";
-            else if($num > $i) $linkcode .= $sep;
+		$linkcode .= '<a href="'.$url.'">'.$nicename.'</a>';
 
-    }
+		if ($mode=='list') $linkcode .= "</li>";
+		else if ($num > $i) $linkcode .= $sep;
 
-    if ($mode=='list') $linkcode .= "</ul>";
+	}
 
-    return $linkcode;
+	if ($mode=='list') $linkcode .= "</ul>";
+
+	return $linkcode;
 }
+
 
 /* vim: set expandtab: */
 

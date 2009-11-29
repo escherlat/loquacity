@@ -1,3 +1,12 @@
+<?php
+/**
+ * ./bblog/inc/bookmarkletstuff.php
+ *
+ * @package default
+ */
+
+
+?>
 <?
 // this all borrowed from wordpress(.org), but I think most of this came from b2
 # browser detection
@@ -62,19 +71,19 @@ $wp_gecko_correction['out'] = array(
         $popuptitle =  preg_replace("/\%u([0-9A-F]{4,4})/e",  "'&#'.base_convert('\\1',16,10).';'", $popuptitle);
         $text =  preg_replace("/\%u([0-9A-F]{4,4})/e",  "'&#'.base_convert('\\1',16,10).';'", $text);
     }
-    
+
     if (($is_gecko) && (!isset($Gecko_bookmarklet_fix))) {
         $popuptitle = preg_replace($wp_gecko_correction["in"],$wp_gecko_correction["out"],$popuptitle);
         $text = preg_replace($wp_gecko_correction["in"],$wp_gecko_correction["out"],$text);
     }
-    
+
     $post_title = $_REQUEST['post_title'];
     if (!empty($post_title)) {
         $post_title =  stripslashes($post_title);
     } else {
         $post_title = $popuptitle;
     }
-    
+
     $content = $_REQUEST['content'];
     if (!empty($content)) {
         $content =  stripslashes($content);

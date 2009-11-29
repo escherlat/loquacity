@@ -1,3 +1,12 @@
+<?php
+/**
+ * ./bblog/config.php
+ *
+ * @package default
+ */
+
+
+?>
 <html><body><h1>bBlog 0.7.6</h1>
 <p>bBlog is not installed, this is the config.php file and has not been overwritten by the installer.</p>
 <p>Please see the <a href="http://www.bblog.com/docs/" target="_blank">bBlog online manual</a> for install instructions.</p>
