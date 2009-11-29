@@ -1,0 +1,9 @@
+TODO
+==================
+
+	* Drop support for PHP 4
+	* Make PHP 5.3 compatible
+	* Separate 3rd party code into cleanly defined area
+	* Make compatible with suPHP ( and any other PHP handler that operates as a system user that is not Apache )
+	* Remove all mixture of PHP + HTML ( except where it obviously makes sense )
+	* More to be determined
