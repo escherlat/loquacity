@@ -1,3 +1,12 @@
+<?php
+/**
+ * ./bblog/inc/mail.php
+ *
+ * @package default
+ */
+
+
+?>
 <?
 // mail.php - send notifications and the like
 // mail.php - author: Eaden McKee
@@ -19,10 +28,10 @@ Regards,
 
 define('MAIL_FROM','"'.htmlspecialchars(C_BLOGNAME).'"'.' <'.C_EMAIL.'>');
 
-// function to notify the owner about a new comment or post. 
-function notify_owner($subject,$message) { 
+// function to notify the owner about a new comment or post.
+function notify_owner($subject,$message) {
 	// do they want notifications?
-	if(C_NOTIFY == 'true') { 
+	if(C_NOTIFY == 'true') {
 		mail(C_EMAIL,$subject,MAIL_HEADER.$message.MAIL_FOOTER,
 						"Content-Type: text/plain; charset=".C_CHARSET."\r\n".
 						"From: ".MAIL_FROM."\r\n".
@@ -34,7 +43,7 @@ function notify_owner($subject,$message) {
 
 }
 
-// function to notify the poster that a reply has been posted to their comment. 
+// function to notify the poster that a reply has been posted to their comment.
 function notify_poster ($to,$subject,$message) {
  // not yet implimented.
 

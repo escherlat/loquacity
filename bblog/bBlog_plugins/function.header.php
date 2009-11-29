@@ -1,5 +1,12 @@
 <?php
-// function.header.php 
+/**
+ * ./bblog/bBlog_plugins/function.header.php
+ *
+ * @package default
+ */
+
+
+// function.header.php
 //
 // Written by Reverend Jim <jim@revjim.net>
 //
@@ -21,22 +28,38 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-function identify_function_header () {
-$help = '
+
+
+/**
+ *
+ *
+ * @return unknown
+ */
+function identify_function_header() {
+	$help = '
 <p>the {header} function is used to set arbitrary HTTP headers. It takes the following parameters:<br />
 <br />
 header: the header to send<br />';
 
-  return array (
-    'name'           =>'header',
-    'type'             =>'function',
-    'nicename'     =>'Header',
-    'description'   =>'Sets an arbitrary HTTP header',
-    'authors'        =>'Reverend Jim <jim@revjim.net>',
-    'licence'         =>'GPL',
-    'help'   => $help
-  );
+	return array (
+		'name'           =>'header',
+		'type'             =>'function',
+		'nicename'     =>'Header',
+		'description'   =>'Sets an arbitrary HTTP header',
+		'authors'        =>'Reverend Jim <jim@revjim.net>',
+		'licence'         =>'GPL',
+		'help'   => $help
+	);
 }
+
+
+/**
+ *
+ *
+ * @param unknown $params
+ * @param unknown $bBlog  (reference)
+ * @return unknown
+ */
 function smarty_function_header($params, &$bBlog) {
 
 	header($params['header']);
@@ -44,4 +67,3 @@ function smarty_function_header($params, &$bBlog) {
 	return '';
 
 }
-

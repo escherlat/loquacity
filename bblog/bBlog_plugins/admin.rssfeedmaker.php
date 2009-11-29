@@ -1,4 +1,11 @@
 <?php
+/**
+ * ./bblog/bBlog_plugins/admin.rssfeedmaker.php
+ *
+ * @package default
+ */
+
+
 // admin.rssfeedmaker.php - easily make custom rss feeds
 /*
 ** bBlog Weblog http://www.bblog.com/
@@ -19,51 +26,61 @@
 ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-function identify_admin_rssfeedmaker () 
-{
-  return array (
-    'name'           =>'rssfeedmaker',
-    'type'             =>'admin',
-    'nicename'     =>'RSS Linker',
-    'description'   =>'Create custom RSS feeds',
-    'template' 	=> 'rssfeedmaker.html',
-    'authors'        =>'Eaden McKee <eadz@bblog.com>',
-    'licence'         =>'GPL',
-    'help'            => ''
-  );
+
+/**
+ *
+ *
+ * @return unknown
+ */
+function identify_admin_rssfeedmaker() {
+	return array (
+		'name'           =>'rssfeedmaker',
+		'type'             =>'admin',
+		'nicename'     =>'RSS Linker',
+		'description'   =>'Create custom RSS feeds',
+		'template'  => 'rssfeedmaker.html',
+		'authors'        =>'Eaden McKee <eadz@bblog.com>',
+		'licence'         =>'GPL',
+		'help'            => ''
+	);
 }
 
-function admin_plugin_rssfeedmaker_run(&$bBlog) 
-{
-	if ((isset($_POST['sub'])) && ($_POST['sub'] == 'y')) 
-	{
+
+/**
+ *
+ *
+ * @param unknown $bBlog (reference)
+ */
+function admin_plugin_rssfeedmaker_run(&$bBlog) {
+	if ((isset($_POST['sub'])) && ($_POST['sub'] == 'y')) {
 		$url = BLOGURL.'rss.php?';
 
 
-		if($_POST['version'] == 2) $url .= 'ver=2';
-		elseif($_POST['version'] == 'atom03') $url .= 'ver=atom03';
+		if ($_POST['version'] == 2) $url .= 'ver=2';
+		elseif ($_POST['version'] == 'atom03') $url .= 'ver=atom03';
 		else $url .= 'ver=0.92';
 
-		if(is_numeric($_POST['num'])) $url .= '&amp;num='.$_POST['num'];
+		if (is_numeric($_POST['num'])) $url .= '&amp;num='.$_POST['num'];
 
-		if($_POST['sectionid']>0) $url .= '&amp;sectionid='.$_POST['sectionid'];
+		if ($_POST['sectionid']>0) $url .= '&amp;sectionid='.$_POST['sectionid'];
 
-		if(is_numeric($_POST['year'])) $url .= '&amp;year='.$_POST['year'];
-		if(is_numeric($_POST['month'])) $url .= '&amp;year='.$_POST['day'];
-		if(is_numeric($_POST['day'])) $url .= '&amp;year='.$_POST['day'];
+		if (is_numeric($_POST['year'])) $url .= '&amp;year='.$_POST['year'];
+		if (is_numeric($_POST['month'])) $url .= '&amp;year='.$_POST['day'];
+		if (is_numeric($_POST['day'])) $url .= '&amp;year='.$_POST['day'];
 
-		$bBlog->assign('results',TRUE);
-		$bBlog->assign('feedurl',$url);
+		$bBlog->assign('results', TRUE);
+		$bBlog->assign('feedurl', $url);
 	}
-	
+
 	$sections = $bBlog->get_sections();
 	$sectionlist = '';
-	
-	foreach ($sections as $section) 
-	{
+
+	foreach ($sections as $section) {
 		$sectionlist .= "<option value='{$section->sectionid}'>{$section->nicename}</option>";
 	}
-	
-	$bBlog->assign('sectionlist',$sectionlist);
+
+	$bBlog->assign('sectionlist', $sectionlist);
 }
+
+
 ?>

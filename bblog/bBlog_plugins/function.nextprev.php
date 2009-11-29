@@ -1,11 +1,24 @@
 <?php
+/**
+ * ./bblog/bBlog_plugins/function.nextprev.php
+ *
+ * @package default
+ */
 
-/* 
+
+/*
     function.nextprev.php - nextprev plugin
 */
-function identify_function_nextprev () {
 
-    $help = '
+
+/**
+ *
+ *
+ * @return unknown
+ */
+function identify_function_nextprev() {
+
+	$help = '
 	<p>This plugin displays your indexes and archive pages in a list of pages.</p>
 	<p>To call the plugin, simply do a <code>{nextprev}</code>.  Just
 	like most of bBlog, this defaults to pages of 20 entries.  If you
@@ -102,146 +115,154 @@ function identify_function_nextprev () {
 	<p>This is version 0.4.1.  For the latest version, see:
 	<a href="http://www.eyt.ca/Software">http://www.eyt.ca/Software</a></p>';
 
-     return array (
-	'name'		=> 'nextprev',
-	'type'		=> 'function',
-	'nicename'	=> 'NextPrev',
-	'description'	=> 'Adds a previous/next button on your indexes',
-	'authors'	=> 'Eric Y. Theriault',
-	'licence'	=> 'GPL',
-	'help'		=> $help
-    );
-    
+	return array (
+		'name'  => 'nextprev',
+		'type'  => 'function',
+		'nicename' => 'NextPrev',
+		'description' => 'Adds a previous/next button on your indexes',
+		'authors' => 'Eric Y. Theriault',
+		'licence' => 'GPL',
+		'help'  => $help
+	);
+
 }
 
+
+/**
+ *
+ *
+ * @param unknown $params
+ * @param unknown $bBlog  (reference)
+ */
 function smarty_function_nextprev($params, &$bBlog) {
-    // Initialize default values...
-    $skip = 0;
-    $num = 20;
-    $max_pages = 0;
-    $pages_before = 0;
+	// Initialize default values...
+	$skip = 0;
+	$num = 20;
+	$max_pages = 0;
+	$pages_before = 0;
 
-    // Set the num parameter
-    if ( is_numeric( $params[ 'num' ] ) ) {
-        $num = $params[ 'num' ];
-    }
+	// Set the num parameter
+	if ( is_numeric( $params[ 'num' ] ) ) {
+		$num = $params[ 'num' ];
+	}
 
-    // Set the max_pages parameter
-    if ( is_numeric( $params[ 'max_pages' ] ) ) {
-        $max_pages = $params[ 'max_pages' ];
-        $pages_before = (int)( $max_pages / 2 );
-    }
+	// Set the max_pages parameter
+	if ( is_numeric( $params[ 'max_pages' ] ) ) {
+		$max_pages = $params[ 'max_pages' ];
+		$pages_before = (int)( $max_pages / 2 );
+	}
 
-    // Acquire the page skip count; if set, snag it.
-    $newSkip = $_GET[ "pageskip" ];
-    if ( $newSkip ) {
-        $skip = $newSkip;
-    }
-    $sectionid = $_GET[ "sectionid" ];
-    $QuerySection = '';
-    $ExtraParams = '';
-    if ( $sectionid ) {
-        $QuerySection .= " AND sections like '%:$sectionid:%'";
-        $ExtraParams .= "&sectionid=$sectionid";
-    }
-    else {
-       // This is for the case of Clean URLS
-       $sectionid = $bBlog->get_template_vars("sectionid");
-       if ( $sectionid ) {
-          $QuerySection .= " AND sections like '%:$sectionid:%'";
-       }
-    }
-    $query_params = $params[ 'query' ];
-    if ( $query_params ) {
-       $QuerySection .= " AND $query_params";
-    }
-    $link_params = $params[ 'link' ];
-    if ( $link_params ) {
-       $ExtraParams .= $link_params;
-    }
-    $posts = $params[ 'posts' ];
+	// Acquire the page skip count; if set, snag it.
+	$newSkip = $_GET[ "pageskip" ];
+	if ( $newSkip ) {
+		$skip = $newSkip;
+	}
+	$sectionid = $_GET[ "sectionid" ];
+	$QuerySection = '';
+	$ExtraParams = '';
+	if ( $sectionid ) {
+		$QuerySection .= " AND sections like '%:$sectionid:%'";
+		$ExtraParams .= "&sectionid=$sectionid";
+	}
+	else {
+		// This is for the case of Clean URLS
+		$sectionid = $bBlog->get_template_vars("sectionid");
+		if ( $sectionid ) {
+			$QuerySection .= " AND sections like '%:$sectionid:%'";
+		}
+	}
+	$query_params = $params[ 'query' ];
+	if ( $query_params ) {
+		$QuerySection .= " AND $query_params";
+	}
+	$link_params = $params[ 'link' ];
+	if ( $link_params ) {
+		$ExtraParams .= $link_params;
+	}
+	$posts = $params[ 'posts' ];
 
-    // Calculate the new offset
-    $offset = $skip * $num;
-    $nextoffset = $offset + $num;
-    $bBlog->assign( "current_offset", $offset );
+	// Calculate the new offset
+	$offset = $skip * $num;
+	$nextoffset = $offset + $num;
+	$bBlog->assign( "current_offset", $offset );
 
-    // Get number of entries...
-    if ( $posts ) {
-       $entryCount = count( $posts );
-       if ( $params[ 'adjust' ] ) {
-          $bBlog->assign( 'posts', array_slice( $posts, $offset, $num ) );
-       }
-    }
-    else {
-       // invariant: Need to query the database and count
-       $countArray = $bBlog->get_results( "select count(*) as nElements from ".T_POSTS." where status = 'live' $QuerySection;" );
-       if ( $bBlog->num_rows <= 0 ) {
-          $entryCount = 0;
-       } else {
-          foreach ( $countArray as $cnt ) {
-              $entryCount = $cnt->nElements;
-          }
-       }
-    }
+	// Get number of entries...
+	if ( $posts ) {
+		$entryCount = count( $posts );
+		if ( $params[ 'adjust' ] ) {
+			$bBlog->assign( 'posts', array_slice( $posts, $offset, $num ) );
+		}
+	}
+	else {
+		// invariant: Need to query the database and count
+		$countArray = $bBlog->get_results( "select count(*) as nElements from ".T_POSTS." where status = 'live' $QuerySection;" );
+		if ( $bBlog->num_rows <= 0 ) {
+			$entryCount = 0;
+		} else {
+			foreach ( $countArray as $cnt ) {
+				$entryCount = $cnt->nElements;
+			}
+		}
+	}
 
-    // Create the previous pages...
-    $i = 0;
-    $current_page = $skip;
-    if ( $max_pages != 0 ) {
-       $i = $current_page - $pages_before;
-       if ( $i < 0 ) {
-          $i = 0;
-       }
-    }
-    $bBlog->assign( "current_page", $current_page + 1 );
-    $bBlog->assign( "gofirstpage", $i + 1 );
-    while ( $i < $current_page ) {
-       $cp = $i + 1;
-       $prevpages[] = array( 'page' => $cp, 'url' => $_SERVER["PHP_SELF"] . "?pageskip=$i$ExtraParams" );
-       ++ $i;
-    }
-    $bBlog->assign( "goprevpages", $prevpages );
+	// Create the previous pages...
+	$i = 0;
+	$current_page = $skip;
+	if ( $max_pages != 0 ) {
+		$i = $current_page - $pages_before;
+		if ( $i < 0 ) {
+			$i = 0;
+		}
+	}
+	$bBlog->assign( "current_page", $current_page + 1 );
+	$bBlog->assign( "gofirstpage", $i + 1 );
+	while ( $i < $current_page ) {
+		$cp = $i + 1;
+		$prevpages[] = array( 'page' => $cp, 'url' => $_SERVER["PHP_SELF"] . "?pageskip=$i$ExtraParams" );
+		++ $i;
+	}
+	$bBlog->assign( "goprevpages", $prevpages );
 
-    // Create the next pages
-    $i = $current_page + 1;
-    $numberOfPages = (int) ( $entryCount / $num );
-    $pages = $numberOfPages;
-    if ( ($pages * $num) < $entryCount ) {
-       $pages ++;
-       $numberOfPages ++;
-    }
-    if ( $max_pages != 0 ) {
-       $pages = $i + $pages_before;
-       if ( $pages > $numberOfPages ) {
-          $pages = $numberOfPages;
-       }
-    }
-    $bBlog->assign( "golastpage", $pages );
-    $bBlog->assign( "gonum_pages", $numberOfPages );
-    while ( $i < $pages ) {
-       $nextpages[] = array( 'page' => $i+1, 'url' => $_SERVER["PHP_SELF"] . "?pageskip=$i$ExtraParams" );
-       ++ $i;
-    }
-    $bBlog->assign( "gonextpages", $nextpages );
+	// Create the next pages
+	$i = $current_page + 1;
+	$numberOfPages = (int) ( $entryCount / $num );
+	$pages = $numberOfPages;
+	if ( ($pages * $num) < $entryCount ) {
+		$pages ++;
+		$numberOfPages ++;
+	}
+	if ( $max_pages != 0 ) {
+		$pages = $i + $pages_before;
+		if ( $pages > $numberOfPages ) {
+			$pages = $numberOfPages;
+		}
+	}
+	$bBlog->assign( "golastpage", $pages );
+	$bBlog->assign( "gonum_pages", $numberOfPages );
+	while ( $i < $pages ) {
+		$nextpages[] = array( 'page' => $i+1, 'url' => $_SERVER["PHP_SELF"] . "?pageskip=$i$ExtraParams" );
+		++ $i;
+	}
+	$bBlog->assign( "gonextpages", $nextpages );
 
-    // Get the previous count...
-    if ( $offset == 0 ) {
-       $previous = 0;
-       $bBlog->assign( "goprev", "" );
-    } else {
-       $previous = $skip - 1;
-       $bBlog->assign( "goprev", $_SERVER["PHP_SELF"] . "?pageskip=$previous$ExtraParams" );
-    }
+	// Get the previous count...
+	if ( $offset == 0 ) {
+		$previous = 0;
+		$bBlog->assign( "goprev", "" );
+	} else {
+		$previous = $skip - 1;
+		$bBlog->assign( "goprev", $_SERVER["PHP_SELF"] . "?pageskip=$previous$ExtraParams" );
+	}
 
-    // Get the next count...
-    if ( $nextoffset < $entryCount ) {
-       $next = $skip + 1;
-       $bBlog->assign( "gonext", $_SERVER["PHP_SELF"] . "?pageskip=$next$ExtraParams" );
-    } else {
-       $next = 0;
-       $bBlog->assign( "gonext", "" );
-    }
+	// Get the next count...
+	if ( $nextoffset < $entryCount ) {
+		$next = $skip + 1;
+		$bBlog->assign( "gonext", $_SERVER["PHP_SELF"] . "?pageskip=$next$ExtraParams" );
+	} else {
+		$next = 0;
+		$bBlog->assign( "gonext", "" );
+	}
 }
-?>
 
+
+?>

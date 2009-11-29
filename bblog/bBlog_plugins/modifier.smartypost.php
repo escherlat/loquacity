@@ -1,4 +1,10 @@
 <?php
+/**
+ * ./bblog/bBlog_plugins/modifier.smartypost.php
+ *
+ * @package default
+ */
+
 
 // modifier.smartypost.php - processes smarty tags embedded in posts
 // Copyright (C) 2003  Mario Delgado <mario@seraphworks.com>
@@ -22,47 +28,61 @@
 ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-function identify_modifier_smartypost () {
 
-    $help='<br>Use the smartypost modifier on the {$post.body} tag,<br> 
+/**
+ *
+ *
+ * @return unknown
+ */
+function identify_modifier_smartypost() {
+
+	$help='<br>Use the smartypost modifier on the {$post.body} tag,<br>
            to process any Smarty tags you have embedded in a post.<br><br>
-           Example : 
-           <ul> 
-               <li>{$post.body|smartypost}</li> 
+           Example :
+           <ul>
+               <li>{$post.body|smartypost}</li>
            </ul> Smarty Post can be used with other modifiers.<br><br>
            Example :
-           <ul> 
-               <li>{$post.body|readmore:$post.postid|smartypost}</li> 
+           <ul>
+               <li>{$post.body|readmore:$post.postid|smartypost}</li>
            </ul>';
 
-    return array (
-      'name'          =>'smartypost',
-      'type'          =>'smarty_modifier',
-      'nicename'      =>'Smarty Post',
-      'description'   =>'Processes Smarty tags in a post',
-      'authors'       =>'Mario Delgado <mario@seraphworks.com>',
-      'licence'       =>'GPL',
-      'help'	      =>$help
-    );
+	return array (
+		'name'          =>'smartypost',
+		'type'          =>'smarty_modifier',
+		'nicename'      =>'Smarty Post',
+		'description'   =>'Processes Smarty tags in a post',
+		'authors'       =>'Mario Delgado <mario@seraphworks.com>',
+		'licence'       =>'GPL',
+		'help'       =>$help
+	);
 
 }
 
+
+/**
+ *
+ *
+ * @param unknown $text
+ * @return unknown
+ */
 function smarty_modifier_smartypost($text) {
 
-    global $bBlog;
-    $bBlog->assign('smartied_post', $text);
-    // we will store the smartypost template in the inc/admin_template dir, becasue almost noone will need to change it, - reduce clutter in the templates/* directory.
-    $tmptemplatedir = $bBlog->template_dir;
-    $tmpcompileid = $bBlog->compile_id;
-    $bBlog->template_dir = BBLOGROOT.'inc/admin_templates';
-    $bBlog->compile_id = 'admin';
-    $output = $bBlog->fetch('smartypost.html');
-    $bBlog->template_dir = $tmptemplatedir;
-    $bBlog->compile_id = $tmpcompileid;
+	global $bBlog;
+	$bBlog->assign('smartied_post', $text);
+	// we will store the smartypost template in the inc/admin_template dir, becasue almost noone will need to change it, - reduce clutter in the templates/* directory.
+	$tmptemplatedir = $bBlog->template_dir;
+	$tmpcompileid = $bBlog->compile_id;
+	$bBlog->template_dir = BBLOGROOT.'inc/admin_templates';
+	$bBlog->compile_id = 'admin';
+	$output = $bBlog->fetch('smartypost.html');
+	$bBlog->template_dir = $tmptemplatedir;
+	$bBlog->compile_id = $tmpcompileid;
 
 
-    return $output;
-	  
+	return $output;
+
 }
+
 
 ?>

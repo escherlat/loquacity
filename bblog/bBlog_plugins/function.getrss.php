@@ -1,13 +1,26 @@
-<?PHP
+<?php
+/**
+ * ./bblog/bBlog_plugins/function.getrss.php
+ *
+ * @package default
+ */
+
+
 // function.getrss.php
 // Modified inc/init.php
-//	Libraries
+// Libraries
 
 $library_dir = dirname(__FILE__).'/rss/';
-require_once($library_dir.'rss.php');
+require_once $library_dir.'rss.php';
 
+
+/**
+ *
+ *
+ * @return unknown
+ */
 function identify_function_getrss() {
-$help = '
+	$help = '
 <p>
 <i>function </i><b>Get Recent Posts</b><br>
 </p>
@@ -16,20 +29,28 @@ $help = '
 <p><b><i>example: </b></i>{getrss id=1 limit=10} - Only show 10 items
 </p>';
 
-  return array (
-    'name'           =>'getrss',
-    'type'             =>'function',
-    'nicename'     =>'Get RSS 0.1.2 alpha',
-    'description'   =>'Parse RSS to HTML',
-    'authors'        =>'Martin Konicek <martin.konicek@atlas.cz>',
-    'licence'         =>'GPL',
-    'help'   => $help
-  );
+	return array (
+		'name'           =>'getrss',
+		'type'             =>'function',
+		'nicename'     =>'Get RSS 0.1.2 alpha',
+		'description'   =>'Parse RSS to HTML',
+		'authors'        =>'Martin Konicek <martin.konicek@atlas.cz>',
+		'licence'         =>'GPL',
+		'help'   => $help
+	);
 }
 
-function smarty_function_getrss($params, &$bBlog) { 
+
+/**
+ *
+ *
+ * @param unknown $params
+ * @param unknown $bBlog  (reference)
+ * @return unknown
+ */
+function smarty_function_getrss($params, &$bBlog) {
 	$outputcharset='UTF8';
-	if(isset($params['id'])) {
+	if (isset($params['id'])) {
 		$rssrow = $bBlog->get_row("select * from ".T_RSS." where url<>'' and id='".$params['id']."'");
 	} else { // get random one
 		$rssrow = $bBlog->get_row("select * from ".T_RSS." where url<>'' order by rand(".time().") limit 0,1");
@@ -39,8 +60,9 @@ function smarty_function_getrss($params, &$bBlog) {
 	if (!isset ($params['limit']))
 		$params['limit'] = 20;
 
-	return get_rss($rssrow->url,$rssrow->input_charset,$outputcharset,$params['limit']);
+	return get_rss($rssrow->url, $rssrow->input_charset, $outputcharset, $params['limit']);
 
 }
+
 
 ?>

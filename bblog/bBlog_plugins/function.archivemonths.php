@@ -1,45 +1,78 @@
 <?php
+/**
+ * ./bblog/bBlog_plugins/function.archivemonths.php
+ *
+ * @package default
+ */
+
+
 /*********************************\
-  bbBlog Plugin: 
-   Build Archive Months Listing 
+  bbBlog Plugin:
+   Build Archive Months Listing
 Copyright
-   2004 Chris Boulton 
-   <c.boulton@mybboard.com> 
+   2004 Chris Boulton
+   <c.boulton@mybboard.com>
 \*********************************/
+
+
+/**
+ *
+ *
+ * @return unknown
+ */
 function identify_function_archivemonths() {
-return array("name" => "archivemonths",
-"type" => "function",
-"nicename" => "Archive Month Listing",
-"description" => "Generates a list of archive months",
-"authors" => "c.boulton@mybboard.com");
+	return array("name" => "archivemonths",
+		"type" => "function",
+		"nicename" => "Archive Month Listing",
+		"description" => "Generates a list of archive months",
+		"authors" => "c.boulton@mybboard.com");
 }
+
+
+/**
+ *
+ *
+ * @param unknown $params
+ * @param unknown $bBlog  (reference)
+ * @return unknown
+ */
 function smarty_function_archivemonths($params, &$bBlog) {
-$num = 10;
-$sep = "<br />";
-$year = "";
-$showcount = 0;
-extract($params);
-if($year) {
-$where = " AND YEAR(FROM_UNIXTIME(posttime)) = '$year'";
+	$num = 10;
+	$sep = "<br />";
+	$year = "";
+	$showcount = 0;
+	extract($params);
+	if ($year) {
+		$where = " AND YEAR(FROM_UNIXTIME(posttime)) = '$year'";
+	}
+	if ($num) {
+		$num = " LIMIT 0, $num";
+	}
+	$query = mysql_query("SELECT DISTINCT YEAR(FROM_UNIXTIME(posttime)) AS year, MONTH(FROM_UNIXTIME(posttime)) AS month, COUNT(postid) AS posts FROM ".T_POSTS." $where GROUP BY YEAR(FROM_UNIXTIME(posttime)), MONTH(FROM_UNIXTIME(posttime)) ORDER BY posttime DESC $limit;");
+	while ($month = mysql_fetch_array($query)) {
+		if ($month[month] < 10) {
+			$month[month] = "0$month[month]";
+		}
+		$monthslist .= "<a href=\"archives.php?month=$month[month]&year=$month[year]\">".getmonthfriendlyname($month[month])." $month[year]</a> ";
+		if ($showcount) {
+			$monthslist .= " <i>$month[posts]</i>";
+		}
+		$monthslist .= "$sep";
+	}
+	return $monthslist;
 }
-if($num) {
-$num = " LIMIT 0, $num";
-}
-$query = mysql_query("SELECT DISTINCT YEAR(FROM_UNIXTIME(posttime)) AS year, MONTH(FROM_UNIXTIME(posttime)) AS month, COUNT(postid) AS posts FROM ".T_POSTS." $where GROUP BY YEAR(FROM_UNIXTIME(posttime)), MONTH(FROM_UNIXTIME(posttime)) ORDER BY posttime DESC $limit;");
-while($month = mysql_fetch_array($query)) {
-if($month[month] < 10) {
-$month[month] = "0$month[month]";
-}
-$monthslist .= "<a href=\"archives.php?month=$month[month]&year=$month[year]\">".getmonthfriendlyname($month[month])." $month[year]</a> ";
-if($showcount) {
-$monthslist .= " <i>$month[posts]</i>";
-}
-$monthslist .= "$sep";
-}
-return $monthslist;
-}
+
+
+/**
+ *
+ *
+ * @param unknown $month
+ * @return unknown
+ */
 function getmonthfriendlyname($month) {
-$tstamp = mktime(0, 0, 0, $month);
-return date("F", $tstamp);
+	$tstamp = mktime(0, 0, 0, $month);
+	return date("F", $tstamp);
 }
+
+
 ?>

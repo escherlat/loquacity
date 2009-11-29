@@ -11,18 +11,22 @@
  *         - preceed_test = if true, includes preceeding break tags
  *           in replacement
  * Example:  {$text|printr}
+ *
  * @version  1.0
  * @author   Eaden McKee  <email@eadz.co.nz>
  * @param string
+ * @param unknown $var (reference)
  * @return string
  */
-function smarty_modifier_printr(&$var)
-{
-    ob_start();
-    print_r($var);
-    $o = ob_get_contents();
-    ob_end_clean();
-    return "<pre>".$o."</pre>";
+
+
+function smarty_modifier_printr(&$var) {
+	ob_start();
+	print_r($var);
+	$o = ob_get_contents();
+	ob_end_clean();
+	return "<pre>".$o."</pre>";
 }
+
 
 ?>

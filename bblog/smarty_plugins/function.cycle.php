@@ -1,9 +1,11 @@
 <?php
 /**
  * Smarty plugin
- * @package Smarty
+ *
  * @subpackage plugins
+ * @package Smarty
  */
+
 
 /**
  * Smarty {cycle} function plugin
@@ -23,13 +25,14 @@
  *         - delimiter = the value delimiter, default is ","
  *         - assign = boolean, assigns to template var instead of
  *                    printed.
- * 
+ *
  * Examples:<br>
  * <pre>
  * {cycle values="#eeeeee,#d0d0d0d"}
  * {cycle name=row values="one,two,three" reset=true}
  * {cycle name=row}
  * </pre>
+ *
  * @link http://smarty.php.net/manual/en/language.function.cycle.php {cycle}
  *       (Smarty online manual)
  * @author Monte Ohrt <monte@ispi.net>
@@ -39,80 +42,82 @@
  * @version  1.3
  * @param array
  * @param Smarty
+ * @param unknown $params
+ * @param unknown $smarty (reference)
  * @return string|null
  */
-function smarty_function_cycle($params, &$smarty)
-{
-    static $cycle_vars;
-    
-    extract($params);
+function smarty_function_cycle($params, &$smarty) {
+	static $cycle_vars;
 
-    if (empty($name)) {
-        $name = 'default';
-    }
+	extract($params);
 
-    if (!isset($print)) {
-        $print = true;
-    }
+	if (empty($name)) {
+		$name = 'default';
+	}
 
-    if (!isset($advance)) {
-        $advance = true;        
-    }    
+	if (!isset($print)) {
+		$print = true;
+	}
 
-    if (!isset($reset)) {
-        $reset = false;        
-    }        
-            
-    if (!in_array('values', array_keys($params))) {
-        if(!isset($cycle_vars[$name]['values'])) {
-            $smarty->trigger_error("cycle: missing 'values' parameter");
-            return;
-        }
-    } else {
-        if(isset($cycle_vars[$name]['values'])
-            && $cycle_vars[$name]['values'] != $values ) {
-            $cycle_vars[$name]['index'] = 0;
-        }
-        $cycle_vars[$name]['values'] = $values;
-    }
+	if (!isset($advance)) {
+		$advance = true;
+	}
 
-    if (isset($delimiter)) {
-        $cycle_vars[$name]['delimiter'] = $delimiter;
-    } elseif (!isset($cycle_vars[$name]['delimiter'])) {
-        $cycle_vars[$name]['delimiter'] = ',';        
-    }
-    
-    if(!is_array($cycle_vars[$name]['values'])) {
-        $cycle_array = explode($cycle_vars[$name]['delimiter'],$cycle_vars[$name]['values']);
-    } else {
-        $cycle_array = $cycle_vars[$name]['values'];    
-    }
-    
-    if(!isset($cycle_vars[$name]['index']) || $reset ) {
-        $cycle_vars[$name]['index'] = 0;
-    }
-    
-    if (isset($assign)) {
-        $print = false;
-        $smarty->assign($assign, $cycle_array[$cycle_vars[$name]['index']]);
-    }
-        
-    if($print) {
-        $retval = $cycle_array[$cycle_vars[$name]['index']];
-    } else {
-        $retval = null;
-    }
+	if (!isset($reset)) {
+		$reset = false;
+	}
 
-    if($advance) {
-        if ( $cycle_vars[$name]['index'] >= count($cycle_array) -1 ) {
-            $cycle_vars[$name]['index'] = 0;            
-        } else {
-            $cycle_vars[$name]['index']++;
-        }
-    }
-    
-    return $retval;
+	if (!in_array('values', array_keys($params))) {
+		if (!isset($cycle_vars[$name]['values'])) {
+			$smarty->trigger_error("cycle: missing 'values' parameter");
+			return;
+		}
+	} else {
+		if (isset($cycle_vars[$name]['values'])
+			&& $cycle_vars[$name]['values'] != $values ) {
+			$cycle_vars[$name]['index'] = 0;
+		}
+		$cycle_vars[$name]['values'] = $values;
+	}
+
+	if (isset($delimiter)) {
+		$cycle_vars[$name]['delimiter'] = $delimiter;
+	} elseif (!isset($cycle_vars[$name]['delimiter'])) {
+		$cycle_vars[$name]['delimiter'] = ',';
+	}
+
+	if (!is_array($cycle_vars[$name]['values'])) {
+		$cycle_array = explode($cycle_vars[$name]['delimiter'], $cycle_vars[$name]['values']);
+	} else {
+		$cycle_array = $cycle_vars[$name]['values'];
+	}
+
+	if (!isset($cycle_vars[$name]['index']) || $reset ) {
+		$cycle_vars[$name]['index'] = 0;
+	}
+
+	if (isset($assign)) {
+		$print = false;
+		$smarty->assign($assign, $cycle_array[$cycle_vars[$name]['index']]);
+	}
+
+	if ($print) {
+		$retval = $cycle_array[$cycle_vars[$name]['index']];
+	} else {
+		$retval = null;
+	}
+
+	if ($advance) {
+		if ( $cycle_vars[$name]['index'] >= count($cycle_array) -1 ) {
+			$cycle_vars[$name]['index'] = 0;
+		} else {
+			$cycle_vars[$name]['index']++;
+		}
+	}
+
+	return $retval;
 }
+
 
 /* vim: set expandtab: */
 

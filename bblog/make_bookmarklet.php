@@ -1,9 +1,18 @@
+<?php
+/**
+ * ./bblog/make_bookmarklet.php
+ *
+ * @package default
+ */
+
+
+?>
 <?
 
 // this all borrowed from wordpress(.org), but I think most of this came from b2
 # browser detection
 $is_lynx = 0; $is_gecko = 0; $is_winIE = 0; $is_macIE = 0; $is_opera = 0; $is_NS4 = 0;
-if (!isset($HTTP_USER_AGENT)) {	
+if (!isset($HTTP_USER_AGENT)) {
 	$HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
 }
 if (preg_match('/Lynx/', $HTTP_USER_AGENT)) {
@@ -79,17 +88,16 @@ function oneclickbookmarklet(blah) {
     One-click bookmarklet:<br />
     <a href="javascript:oneclickbookmarklet(0);">click here</a>
     <?php
-} else if ($is_opera) {
+	} else if ($is_opera) {
 ?>
     <a href="javascript:void(window.open('<?php echo $siteurl ?>index.php?b=post&popup=true&popupurl='+escape(location.href)+'&popuptitle='+escape(document.title)+'<?php echo $bookmarklet_tbpb ?>','bookmarklet','scrollbars=yes,width=600,height=<?php echo $bookmarklet_height ?>,left=100,top=150,status=yes'));">Press it
     - <?php echo $blogname ?></a>
     <?php
-} else if ($is_macIE) {
+	} else if ($is_macIE) {
 ?>
     <a href="javascript:Q='';if(top.frames.length==0);void(btw=window.open('<?php echo $siteurl ?>index.php?b=post&popup=true&text='+escape(document.getSelection())+'&popupurl='+escape(location.href)+'&popuptitle='+escape(document.title)+'<?php echo $bookmarklet_tbpb ?>','bookmarklet','scrollbars=yes,width=600,height=<?php echo $bookmarklet_height ?>,left=100,top=150,status=yes'));btw.focus();">Press it
-    - <?php echo $blogname ?></a> 
+    - <?php echo $blogname ?></a>
     <?php
-}
+	}
 ?>
 </p>
-

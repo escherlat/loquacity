@@ -1,8 +1,9 @@
 <?php
 /**
  * Smarty plugin
- * @package Smarty
+ *
  * @subpackage plugins
+ * @package Smarty
  */
 
 
@@ -12,16 +13,19 @@
  * Type:     modifier<br>
  * Name:     string_format<br>
  * Purpose:  format strings via sprintf
+ *
  * @link http://smarty.php.net/manual/en/language.modifier.string.format.php
  *          string_format (Smarty online manual)
  * @param string
  * @param string
+ * @param unknown $string
+ * @param unknown $format
  * @return string
  */
-function smarty_modifier_string_format($string, $format)
-{
-    return sprintf($format, $string);
+function smarty_modifier_string_format($string, $format) {
+	return sprintf($format, $string);
 }
+
 
 /* vim: set expandtab: */
 

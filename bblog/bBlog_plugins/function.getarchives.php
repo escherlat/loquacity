@@ -1,5 +1,12 @@
 <?php
-// function.getarchives.php 
+/**
+ * ./bblog/bBlog_plugins/function.getarchives.php
+ *
+ * @package default
+ */
+
+
+// function.getarchives.php
 //
 // Written by Reverend Jim <jim@revjim.net>
 //
@@ -21,8 +28,15 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-function identify_function_getarchives () {
-$help = '
+
+
+/**
+ *
+ *
+ * @return unknown
+ */
+function identify_function_getarchives() {
+	$help = '
 <p>the {getarchives} function is used to retrieve a list of archives. It takes the following parameters:<br />
 <br />
 assign: variable to assign data to<br />
@@ -36,38 +50,48 @@ minute: requests archives only from a certain minute<br />
 second: requests archives only from a certain second<br />
 count: requests a count of the number of entries in each archive (takes longer to compute)<br />';
 
-  return array (
-    'name'           =>'getarchives',
-    'type'             =>'function',
-    'nicename'     =>'GetArchives',
-    'description'   =>'Retrieves a list of archives',
-    'authors'        =>'Reverend Jim <jim@revjim.net>',
-    'licence'         =>'GPL',
-    'help'   => $help
-  );
+	return array (
+		'name'           =>'getarchives',
+		'type'             =>'function',
+		'nicename'     =>'GetArchives',
+		'description'   =>'Retrieves a list of archives',
+		'authors'        =>'Reverend Jim <jim@revjim.net>',
+		'licence'         =>'GPL',
+		'help'   => $help
+	);
 }
+
+
+/**
+ *
+ *
+ * @param unknown $params
+ * @param unknown $bBlog  (reference)
+ * @return unknown
+ */
 function smarty_function_getarchives($params, &$bBlog) {
-  $ar = array();
-  $opt = $params;
+	$ar = array();
+	$opt = $params;
 
 	unset($opt['assign']);
 
 	// If "assign" is not set... we'll establish a default.
-	if($params['assign'] == '') {
+	if ($params['assign'] == '') {
 		$params['assign'] = 'archives';
 	}
 
 	$ar = $bBlog->get_archives($opt);
-	
+
 	// No posts.
-  if(!is_array($ar)) {
+	if (!is_array($ar)) {
 		return '';
 	}
 
-	$bBlog->assign($params['assign'],$ar);
+	$bBlog->assign($params['assign'], $ar);
 
-  return '';
-	
+	return '';
+
 }
+
 
 ?>

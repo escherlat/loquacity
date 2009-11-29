@@ -1,4 +1,11 @@
 <?php
+/**
+ * ./search.php
+ *
+ * @package default
+ */
+
+
 include "bblog/config.php";
 $bBlog->assign('string', $_GET['string']);
 $encoded = urlencode($_GET['string']);

@@ -1,15 +1,26 @@
-<?php // bBlog Plugin : referers.
-// function.referers.php - Show ( and log ) recent referers
-// based on code by nathan@ncyoung.com
-// usage:
-// in a page template : {referers}.
-// To seperate links other than the default <br> : {referers sep=" | "} to seperate by pipe
-// other paramaters :
-// {referers pages="all"} show referers for all pages.
-//  ( the default is to just show the referers for the current page }
-//
-function identify_function_referers () {
-$help = '
+<?php
+/**
+ * ./bblog/bBlog_plugins/function.referers.php
+ *
+ * @package default
+ */
+
+
+/**
+ * bBlog Plugin : referers.
+ * function.referers.php - Show ( and log ) recent referers
+ * based on code by nathan@ncyoung.com
+ * usage:
+ * in a page template : {referers}.
+ * To seperate links other than the default <br> : {referers sep=" | "} to seperate by pipe
+ * other paramaters :
+ * {referers pages="all"} show referers for all pages.
+ * ( the default is to just show the referers for the current page }
+ *
+ * @return unknown
+ */
+function identify_function_referers() {
+	$help = '
 <p>Referers is a Smarty function to be used in templates that captures and lists referers to the current page.
 <p>Example usage ( in a template put ) : {referers}
 <p>The referer link list is seperate by a &lt;br&gt; by default. To override :<br>
@@ -21,20 +32,22 @@ $help = '
 Those paramaters may be combined : {referers num=10 global=TRUE sep=" | "}';
 
 
-  return array (
-    'name'           =>'referers',
-    'type'             =>'function',
-    'nicename'     =>'Referers',
-    'description'   =>'Captures and list referers',
-    'authors'        =>'nathan@ncyoung.com',
-    'licence'         =>'Free',
-    'help'   => $help
-  );
+	return array (
+		'name'           =>'referers',
+		'type'             =>'function',
+		'nicename'     =>'Referers',
+		'description'   =>'Captures and list referers',
+		'authors'        =>'nathan@ncyoung.com',
+		'licence'         =>'Free',
+		'help'   => $help
+	);
 
 
 }
-/* if you want to use this plugin out side of smarty, 
- use this mysql table format : 
+
+
+/* if you want to use this plugin out side of smarty,
+ use this mysql table format :
 
 CREATE TABLE `bB_referers` (
 `visitID` int(11) NOT NULL auto_increment,
@@ -48,38 +61,50 @@ PRIMARY KEY  (`visitID`)
 and define your base url :
 define('BLOGURL','http://www.example.com/');
 */
-define('T_REFERERS',TBL_PREFIX.'referers');
+define('T_REFERERS', TBL_PREFIX.'referers');
 
 logReferer();
 
+
+/**
+ *
+ *
+ * @param unknown $params
+ * @param unknown $bBlog  (reference)
+ * @return unknown
+ */
 function smarty_function_referers($params, &$bBlog) {
-    $num = 5;
-    $sep = "<br />";
-    $mode = "break";
-    $global = "";
-    $top = FALSE;
-    extract($params);
-  
-    if($top) { $ret=toprefererlist($num,$global); }
-    else { $ret=refererlist($num,$global); }
-    
-    if($mode = 'list') { return tolist($ret); }
-    else { return implode($sep, $ret); }
+	$num = 5;
+	$sep = "<br />";
+	$mode = "break";
+	$global = "";
+	$top = FALSE;
+	extract($params);
+
+	if ($top) { $ret=toprefererlist($num, $global); }
+	else { $ret=refererlist($num, $global); }
+
+	if ($mode = 'list') { return tolist($ret); }
+	else { return implode($sep, $ret); }
 }
 
 
-function tolist($array)
-{
-  $ret="<ul>";
+/**
+ *
+ *
+ * @param unknown $array
+ * @return unknown
+ */
+function tolist($array) {
+	$ret="<ul>";
 
-  foreach ($array as $elem)
-  {
-    $ret .= "<li>".$elem."</li>";
-  }
+	foreach ($array as $elem) {
+		$ret .= "<li>".$elem."</li>";
+	}
 
-  $ret.="</ul>";
+	$ret.="</ul>";
 
-  return $ret;
+	return $ret;
 }
 
 
@@ -95,14 +120,18 @@ function tolist($array)
 // mysql_select_db("dbName");
 
 //if ($refererList){
-//	$ar = refererList($refererList,"global");
-//	print join("<BR>",$ar);
+// $ar = refererList($refererList,"global");
+// print join("<BR>",$ar);
 //}
 //if ($topRefererList){
-//	print join("<BR>",topRefererList($topRefererList,"global"));
+// print join("<BR>",topRefererList($topRefererList,"global"));
 //}
 
-function logReferer(){
+
+/**
+ *
+ */
+function logReferer() {
 
 
 	$currentURL = $_SERVER['REQUEST_URI'];
@@ -110,31 +139,31 @@ function logReferer(){
 
 	$ref = getenv('HTTP_REFERER');
 
-	if (!$ref){
+	if (!$ref) {
 		dbg("no referer");
 		return;
 	}
 
-	if ($ref != strip_tags($ref)){
+	if ($ref != strip_tags($ref)) {
 		//then they have tried something funny,
 		//putting HTML or PHP into the HTTP_REFERER
 		dbg("bad char in referer");
 		return;
 	}
 
-	$ignore = Array(
+	$ignore = array(
 		BLOGURL,
 		'http://www.myelin.co.nz/ecosystem/bot.php',
 		'http://radio.xmlstoragesystem.com/rcsPublic/',
 		'http://blogdex.media.mit.edu//',
 		'http://subhonker6.userland.com/rcsPublic/',
-                'http://subhonker7.userland.com/rcsPublic/',		
+		'http://subhonker7.userland.com/rcsPublic/',
 		'mastadonte.com',
 		'+++++++++++++'
 
 	);
-	foreach ($ignore as $site){
-		if (stristr($ref, $site)){
+	foreach ($ignore as $site) {
+		if (stristr($ref, $site)) {
 			dbg("referer ignored");
 			return;
 		}
@@ -142,7 +171,7 @@ function logReferer(){
 
 	$doubleCheckReferers = 0;
 
-	if ($doubleCheckReferers){
+	if ($doubleCheckReferers) {
 
 		dbg("loading referering page");
 
@@ -152,20 +181,20 @@ function logReferer(){
 		flush();
 
 		$goodReferer = 0;
-		$fp = @fopen ($ref, "r");
-		if ($fp){
+		$fp = @fopen($ref, "r");
+		if ($fp) {
 			//timeout after 5 seconds
 			socket_set_timeout($fp, 5);
-			while (!feof ($fp)) {
+			while (!feof($fp)) {
 				$page .= trim(fgets($fp));
 			}
-			if (strstr($page,$fullCurrentURL)){
+			if (strstr($page, $fullCurrentURL)) {
 				dbg("found current url in page");
 				$goodReferer = 1;
 			}
 		}
 
-		if(!$goodReferer){
+		if (!$goodReferer) {
 			dbg("did not find \n\n:$fullCurrentURL:\n in \n\n\n :$page: \n\n\n");
 			return;
 		}
@@ -188,22 +217,29 @@ function logReferer(){
 
 
 
-function refererList ($howMany=5,$visitURL=""){
+/**
+ *
+ *
+ * @param unknown $howMany  (optional)
+ * @param unknown $visitURL (optional)
+ * @return unknown
+ */
+function refererList($howMany=5, $visitURL="") {
 
 	$i=2;
 
-	$ret = Array();
+	$ret = array();
 
 	//if no visitURL, will show links to current page.
 	//if url given, will show links to that page.
 	//if url="global" will show links to all pages
-	if (!$visitURL){
+	if (!$visitURL) {
 
 		$visitURL = $_SERVER['REQUEST_URI'];
 
 	}
 
-	if ($visitURL == "global"){
+	if ($visitURL == "global") {
 		$sqr_recentReferer = mysql_query("select * from ".T_REFERERS." order by visitID desc");
 	}
 	else {
@@ -212,27 +248,27 @@ function refererList ($howMany=5,$visitURL=""){
 
 
 
-	while($result_row = mysql_fetch_array($sqr_recentReferer)){
+	while ($result_row = mysql_fetch_array($sqr_recentReferer)) {
 
 		$fullUrl = $result_row['referingURL'];
 		$domain = $result_row['baseDomain'];
-		if (!$domain){
+		if (!$domain) {
 			continue;
 		}
 
-		if ($last[$domain]){
+		if ($last[$domain]) {
 			continue;
 		}
 		$last[$domain] = 1;
 
-                // Fix parameter lists in URL, now conforms to xhtml
+		// Fix parameter lists in URL, now conforms to xhtml
 		$fullUrl = str_replace("&", "&#38;", $fullUrl);
 
 		$temp = "<a href=\"$fullUrl\">$domain</a>";
 
-		array_push($ret,$temp);
+		array_push($ret, $temp);
 
-		if ($i++ > $howMany){
+		if ($i++ > $howMany) {
 			break;
 		}
 
@@ -241,27 +277,34 @@ function refererList ($howMany=5,$visitURL=""){
 }
 
 
-function topRefererList ($howMany=5,$visitURL=""){
+/**
+ *
+ *
+ * @param unknown $howMany  (optional)
+ * @param unknown $visitURL (optional)
+ * @return unknown
+ */
+function topRefererList($howMany=5, $visitURL="") {
 
 
 	$i=2;
 
-	$ret = Array();
+	$ret = array();
 
 
 	//see refererList() for notes.
-	if (!$visitURL){
+	if (!$visitURL) {
 		$visitURL = $_SERVER['REQUEST_URI'];
 	}
 
-	if ($visitURL == "global"){
+	if ($visitURL == "global") {
 		$sqr_recentReferer = mysql_query("select Count(baseDomain) as totalHits, baseDomain from ".T_REFERERS."  group by baseDomain order by totalHits desc limit $howMany");
 	}
 	else {
 		$sqr_recentReferer = mysql_query("select Count(baseDomain) as totalHits, baseDomain from ".T_REFERERS." where visitURL = '$visitURL' group by baseDomain order by totalHits desc limit $howMany");
 	}
 
-	while($result_row = mysql_fetch_array($sqr_recentReferer)){
+	while ($result_row = mysql_fetch_array($sqr_recentReferer)) {
 
 		$count = $result_row['totalHits'];
 		$domain = $result_row['baseDomain'];
@@ -270,13 +313,13 @@ function topRefererList ($howMany=5,$visitURL=""){
 		$uRow = mysql_fetch_array($uSet);
 		$latestUrl = $uRow["referingURL"];
 
-                // Fix parameter lists in URL, now conforms to xhtml
-                $latestUrl = str_replace("&", "&#38;", $latestUrl);
+		// Fix parameter lists in URL, now conforms to xhtml
+		$latestUrl = str_replace("&", "&#38;", $latestUrl);
 
-                $temp = "<a href=\"$latestUrl\">$domain</a> ($count)";
-		array_push($ret,$temp);
+		$temp = "<a href=\"$latestUrl\">$domain</a> ($count)";
+		array_push($ret, $temp);
 
-		if ($i++ > $howMany){
+		if ($i++ > $howMany) {
 			break;
 		}
 
@@ -284,9 +327,15 @@ function topRefererList ($howMany=5,$visitURL=""){
 	return $ret;
 }
 
-function dbg($string){
+
+/**
+ *
+ *
+ * @param unknown $string
+ */
+function dbg($string) {
 	// global $bBlog;
-	// 	
+	//
 }
 
 
